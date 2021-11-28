@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -16,6 +17,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 
 import ltd.hujing.myaccount.ui.history.HistoryActivity;
@@ -29,31 +34,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @SuppressLint({"NonConstantResourceId", "RtlHardcoded"})
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()){
-                            case R.id.nav_front:
-                                intent = new Intent(MainActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                                break;
-                            case R.id.nav_history:
-                                intent = new Intent(MainActivity.this, HistoryActivity.class);
-                                startActivity(intent);
-                                break;
-                            case R.id.nav_analyse:
-                                break;
-                            case R.id.nav_person:
-                                break;
-                        }
-                        drawerLayout.closeDrawer(Gravity.LEFT);
-                        return false;
+            new NavigationView.OnNavigationItemSelectedListener() {
+                @SuppressLint({"NonConstantResourceId", "RtlHardcoded"})
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()){
+                        case R.id.nav_front:
+
+                            break;
+                        case R.id.nav_history:
+                            intent = new Intent(MainActivity.this, HistoryActivity.class);
+                            startActivity(intent);
+                            break;
+                        case R.id.nav_analyse:
+                            break;
+                        case R.id.nav_person:
+                            break;
                     }
-                });
+                    drawerLayout.closeDrawer(Gravity.LEFT);
+                    return false;
+                }
+            });
+
 
     }
 
