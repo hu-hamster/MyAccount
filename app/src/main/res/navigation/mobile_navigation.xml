@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_history"
-        android:name="ltd.hujing.myaccount.ui.gallery.GalleryFragment"
+        android:name="ltd.hujing.myaccount.ui.history.GalleryFragment"
         android:label="@string/menu_history"
         tools:layout="@layout/fragment_gallery" />
 
