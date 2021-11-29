@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 
+import ltd.hujing.myaccount.ui.additem.AddItemActivity;
 import ltd.hujing.myaccount.ui.history.HistoryActivity;
 import ltd.hujing.myaccount.ui.home.HomeActivity;
 
@@ -34,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()){
                         case R.id.nav_front:
-
                             break;
                         case R.id.nav_history:
                             intent = new Intent(MainActivity.this, HistoryActivity.class);
@@ -59,9 +60,16 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             });
-
-
-    }
+        //设置FloatingActionButton监听事件
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.home_add);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, AddItemActivity.class);
+                startActivity(intent);
+            }
+        });
+     }
 
 
     @Override
