@@ -15,13 +15,15 @@ public class TypeBean {
     public TypeBean(){
     }
 
-    public TypeBean(int id, String name, int imageid, int simageid, int kind, String description, Calendar calendar) {
+    public TypeBean(int id, String name, int imageid, int simageid, int kind) {
         this.id = id;
         this.typename = name;
         this.imageid = imageid;
         this.simageid = simageid;
         this.kind = kind;
     }
+
+
 
     public int getId() {
         return id;
