@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_to_top"
+        android:id="@+id/action_to_top"
         android:orderInCategory="100"
-        android:title="@string/menu_to_top"
-        app:showAsAction="ifRoom" />
+        android:title="@string/action_to_top"
+        app:showAsAction="always" />
 </menu>

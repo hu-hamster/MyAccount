@@ -2,30 +2,12 @@
     <string name="app_name">纯记账</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">青山纯小帅</string>
-    <string name="nav_header_subtitle">我真帅，纯记账真好用</string>
-    <string name="nav_header_desc">头像</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_to_top">回到顶部</string>
 
-    <string name="menu_to_top">回到顶部</string>
-    <string name="menu_front">首页</string>
-    <string name="menu_history">历史查看</string>
-    <string name="menu_analyse">分析统计</string>
-    <string name="menu_person">个人中心</string>
-
-    <string name="home_assets">净资产</string>
-    <string name="home_assets_value">0.00</string>
-    <string name="home_income">0.00</string>
-    <string name="home_expenditure">0.00</string>
-    <string name="home_income_static">本月收入</string>
-    <string name="home_expenditure_static">本月支出</string>
-
-    <string name="home_add_item">add item</string>
-    <string name="home_add_income">收入</string>
-    <string name="home_add_expenditure">支出</string>
-    <string name="home_add_daily">日常开销</string>
-    <string name="home_add_food">饮食</string>
-    <string name="home_add_fruit">水果</string>
-    <string name="home_add_game">游戏</string>
-    <string name="home_add_gift">礼物</string>
-    <string name="home_add_home">家庭</string>
+    <string name="menu_home">首页</string>
+    <string name="menu_gallery">历史查看</string>
+    <string name="menu_slideshow">分析统计</string>
 </resources>

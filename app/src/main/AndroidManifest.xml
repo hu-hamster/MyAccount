@@ -10,13 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAccount">
         <activity
-            android:name=".ui.additem.AddItemActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.history.HistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.home.HomeActivity"
+            android:name=".ui.addinfo.addincome"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

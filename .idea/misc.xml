@@ -6,17 +6,19 @@
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/drawable/ic_item_daily.xml" value="0.34739583333333335" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/drawable/ic_launcher_background.xml" value="0.34739583333333335" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/activity_add_item.xml" value="0.28072916666666664" />
+        <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/activity_addincome.xml" value="0.5010416666666667" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/activity_history.xml" value="0.4466666666666667" />
-        <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/activity_main.xml" value="0.4003623188405797" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/add_item.xml" value="0.33125" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/add_item_layout.xml" value="0.33125" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/app_bar_history.xml" value="0.5541666666666667" />
-        <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/app_bar_main.xml" value="0.1" />
+        <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/app_bar_main.xml" value="0.3333333333333333" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/content_main.xml" value="0.4003623188405797" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/fragment_gallery.xml" value="0.5541666666666667" />
-        <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/fragment_home.xml" value="0.5541666666666667" />
+        <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/fragment_slideshow.xml" value="0.2953125" />
+        <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/item_header.xml" value="0.5005208333333333" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/layout/nav_header_main.xml" value="0.4003623188405797" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/menu/activity_main_drawer.xml" value="0.5541666666666667" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/menu/main.xml" value="0.346875" />

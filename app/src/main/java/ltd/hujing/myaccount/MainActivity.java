@@ -1,76 +1,50 @@
 package ltd.hujing.myaccount;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.Menu;
 import android.view.View;
+import android.view.Menu;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
 
-
-import ltd.hujing.myaccount.ui.additem.AddItemActivity;
-import ltd.hujing.myaccount.ui.history.HistoryActivity;
-import ltd.hujing.myaccount.ui.home.HomeActivity;
+import ltd.hujing.myaccount.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    private DrawerLayout drawerLayout;
-    private Intent intent;
+
+    private AppBarConfiguration mAppBarConfiguration;
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-            new NavigationView.OnNavigationItemSelectedListener() {
-                @SuppressLint({"NonConstantResourceId", "RtlHardcoded"})
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()){
-                        case R.id.nav_front:
-                            break;
-                        case R.id.nav_history:
-                            intent = new Intent(MainActivity.this, HistoryActivity.class);
-                            startActivity(intent);
-                            break;
-                        case R.id.nav_analyse:
-                            break;
-                        case R.id.nav_person:
-                            break;
-                    }
-                    drawerLayout.closeDrawer(Gravity.LEFT);
-                    return false;
-                }
-            });
-        //设置FloatingActionButton监听事件
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.home_add);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(MainActivity.this, AddItemActivity.class);
-                startActivity(intent);
-            }
-        });
-     }
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.appBarMain.toolbar);
+
+        DrawerLayout drawer = binding.drawerLayout;
+        NavigationView navigationView = binding.navView;
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                .setOpenableLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,11 +53,19 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //定义回到顶部按钮事件
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.menu_to_top)
-            Toast.makeText(this, "test",Toast.LENGTH_SHORT).show();
-        return true;
+        if(item.getItemId()==R.id.action_to_top){
+            Toast.makeText(this,"123",Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
 }
