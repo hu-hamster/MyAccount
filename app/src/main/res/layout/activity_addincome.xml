@@ -6,23 +6,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.addinfo.addincome">
-
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.MyAccount.AppBarOverlay">
+        android:layout_height="50dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.MyAccount.PopupOverlay" />
+        <ImageView
+            android:id="@+id/add_item_back"
+            android:layout_width="38dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/add_item_back"
+            android:onClick="onClick"
+            android:layout_marginLeft="10dp"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/add_item_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            app:tabGravity="center"
+            app:tabMode="fixed"
+            app:tabTextColor="#7D7D7D"
+            app:tabSelectedTextColor="#999999"
+            app:tabIndicatorColor="#000000">
 
-    </com.google.android.material.appbar.AppBarLayout>
 
-
-
+        </com.google.android.material.tabs.TabLayout>
+    </RelativeLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/add_item_viewpager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

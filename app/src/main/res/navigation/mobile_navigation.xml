@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/nav_front"
         android:name="ltd.hujing.myaccount.ui.home.HomeFragment"
-        android:label="@string/menu_front"
+        android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_history"
-        android:name="ltd.hujing.myaccount.ui.history.GalleryFragment"
+        android:name="ltd.hujing.myaccount.ui.history.HistoryFragment"
         android:label="@string/menu_history"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_analyse"
-        android:name="ltd.hujing.myaccount.ui.additem.SlideshowFragment"
+        android:name="ltd.hujing.myaccount.ui.analyse.AnalyseFragment"
         android:label="@string/menu_analyse"
         tools:layout="@layout/fragment_slideshow" />
 

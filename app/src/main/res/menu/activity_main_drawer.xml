@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_front"
             android:icon="@mipmap/menu_front"
-            android:title="@string/menu_front" />
+            android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_history"
             android:icon="@mipmap/menu_history"
@@ -16,10 +16,5 @@
             android:id="@+id/nav_analyse"
             android:icon="@mipmap/menu_analyse_statistic"
             android:title="@string/menu_analyse" />
-        <item
-            android:id="@+id/nav_person"
-            android:icon="@mipmap/menu_header"
-            android:title="@string/menu_person"
-            />
     </group>
 </menu>

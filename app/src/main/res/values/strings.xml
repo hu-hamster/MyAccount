@@ -8,6 +8,15 @@
     <string name="action_to_top">回到顶部</string>
 
     <string name="menu_home">首页</string>
-    <string name="menu_gallery">历史查看</string>
-    <string name="menu_slideshow">分析统计</string>
+    <string name="menu_history">历史查看</string>
+    <string name="menu_analyse">分析统计</string>
+    <string name="item_header_assets">净资产</string>
+    <string name="item_header_assets_value">￥ 131231.00</string>
+    <string name="item_header_income_value">￥ 131231.00</string>
+    <string name="item_header_income">本月收入</string>
+    <string name="item_header_expenditure_value">￥ 131231.00</string>
+    <string name="item_header_expenditure">本月支出</string>
+
+    
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
