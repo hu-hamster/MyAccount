@@ -1,5 +1,6 @@
 package ltd.hujing.myaccount.ui.addinfo;
 
+import android.content.Context;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 
@@ -10,14 +11,18 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ltd.hujing.myaccount.R;
+import ltd.hujing.myaccount.adapter.TypeBaseAdapter;
+import ltd.hujing.myaccount.db.DBManager;
 import ltd.hujing.myaccount.db.TypeBean;
 import ltd.hujing.myaccount.utils.KeyBoardUtils;
 
@@ -88,6 +93,12 @@ public class OutcomeFragment extends Fragment {
     }
     //给GridView填充数据
     private void loadDataToGV() {
-
+        typeBeanList = new ArrayList<>();
+        TypeBaseAdapter adapter = new TypeBaseAdapter(getContext(),typeBeanList);
+        typeGv.setAdapter(adapter);
+        //获取数据库当中的数据源
+        List<TypeBean> outlist = DBManager.getTypeList(0);
+        typeBeanList.addAll(outlist);
+        adapter.notifyDataSetChanged();
     }
 }

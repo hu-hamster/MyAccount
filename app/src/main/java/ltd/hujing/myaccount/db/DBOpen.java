@@ -18,15 +18,14 @@ public class DBOpen extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //创建表示类型的表
-        String sql = "create table typetb(id integer primary key autoincrement, typename varchar(10), " +
-                "imageid integer, simageid integer, kind integer)";
+        String sql = "create table typetb(id integer primary key autoincrement,typename varchar(10),imageId integer,sImageId integer,kind integer)";
         db.execSQL(sql);
         insertType(db);
     }
 
     private void insertType(SQLiteDatabase db){
         //向typetb表中插入元素
-        String sql = "insert into typedb (typename, imageid, simageid,kind) values (?,?,?,?)";
+        String sql = "insert into typetb (typename,imageId,sImageId,kind) values (?,?,?,?)";
         db.execSQL(sql,new Object[]{"其他", R.mipmap.other,R.mipmap.other_1,0});
         db.execSQL(sql,new Object[]{"吃喝饮食", R.mipmap.food,R.mipmap.food_1,0});
         db.execSQL(sql,new Object[]{"交通出行", R.mipmap.vehicle,R.mipmap.vehicle_1,0});
