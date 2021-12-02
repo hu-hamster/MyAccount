@@ -1,50 +1,30 @@
 package ltd.hujing.myaccount.ui.addinfo;
 
-import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import java.util.List;
 
 import ltd.hujing.myaccount.R;
+import ltd.hujing.myaccount.db.AccountBean;
+import ltd.hujing.myaccount.db.DBManager;
+import ltd.hujing.myaccount.db.TypeBean;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link IncomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class IncomeFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-
-    public IncomeFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static IncomeFragment newInstance() {
-        IncomeFragment fragment = new IncomeFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+public class IncomeFragment extends BaseRecordFragment {
+    //重载
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void saveAccountToDB() {
+        AccountBean accountBean = getAccountBean();
+        accountBean.setKind(1);
+        DBManager.insertItemAccounttb(accountBean);
     }
 
+    //重写
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootview = inflater.inflate(R.layout.fragment_income, container, false);
-        return rootview;
+    public void loadDataToGV() {
+        super.loadDataToGV();
+        //获取数据库当中的数据源
+        List<TypeBean> inlist = DBManager.getTypeList(1);
+        getTypeBeanList().addAll(inlist);
+        getAdapter().notifyDataSetChanged();
+        getTypeTv().setText("其他");
+        getTypeIv().setImageResource(R.mipmap.other);
     }
 }

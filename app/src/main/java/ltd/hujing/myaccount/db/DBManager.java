@@ -1,6 +1,7 @@
 package ltd.hujing.myaccount.db;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -38,6 +39,24 @@ public class DBManager {
             list.add(typeBean);
         }
         return list;
+    }
+
+    /*
+    * 向记账表中插入一条元素
+     */
+    public static void insertItemAccounttb(AccountBean accountBean){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("typename",accountBean.getTypename());
+        contentValues.put("imageid",accountBean.getImageid());
+        contentValues.put("description",accountBean.getDescription());
+        contentValues.put("money",accountBean.getMoney());
+        contentValues.put("time",accountBean.getTime());
+        contentValues.put("year",accountBean.getYear());
+        contentValues.put("month",accountBean.getMonth());
+        contentValues.put("day",accountBean.getDay());
+        contentValues.put("kind",accountBean.getKind());
+        db.insert("accounttb",null,contentValues);
+
     }
 
 }

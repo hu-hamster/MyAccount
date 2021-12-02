@@ -6,7 +6,7 @@ package ltd.hujing.myaccount.db;
 public class AccountBean {
     private int id;
     private String typename;      //类型
-    private int sImageId;         //被选中类型图片
+    private int imageid;         //被选中类型图片
     private String description;   //备注
     private double money;          //价格
     private String time;           //时间
@@ -17,10 +17,10 @@ public class AccountBean {
 
     public AccountBean(){}
 
-    public AccountBean(int id, String typename, int sImageId, String description, double money, String time, int year, int month, int day, int kind) {
+    public AccountBean(int id, String typename, int imageid, String description, double money, String time, int year, int month, int day, int kind) {
         this.id = id;
         this.typename = typename;
-        this.sImageId = sImageId;
+        this.imageid = imageid;
         this.description = description;
         this.money = money;
         this.time = time;
@@ -46,12 +46,12 @@ public class AccountBean {
         this.typename = typename;
     }
 
-    public int getsImageId() {
-        return sImageId;
+    public int getImageid() {
+        return imageid;
     }
 
-    public void setsImageId(int sImageId) {
-        this.sImageId = sImageId;
+    public void setImageid(int imageid) {
+        this.imageid = imageid;
     }
 
     public String getDescription() {
