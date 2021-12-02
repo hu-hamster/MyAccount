@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,7 @@ public class DBManager {
         contentValues.put("day",accountBean.getDay());
         contentValues.put("kind",accountBean.getKind());
         db.insert("accounttb",null,contentValues);
+        Log.i("test", "insertItemAccounttb: ok");
 
     }
 
