@@ -31,11 +31,11 @@ public class DBManager {
         Cursor cursor = db.rawQuery(sql, null);
         //循环读取图标内容，存储到对象当中
         while(cursor.moveToNext()){
-            String typename = cursor.getString(cursor.getColumnIndex("typename"));
-            int imageId = cursor.getInt(cursor.getColumnIndex("imageId"));
-            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
-            int kind1 = cursor.getInt(cursor.getColumnIndex("kind"));
-            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            @SuppressLint("Range") int imageId = cursor.getInt(cursor.getColumnIndex("imageId"));
+            @SuppressLint("Range") int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            @SuppressLint("Range") int kind1 = cursor.getInt(cursor.getColumnIndex("kind"));
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
             TypeBean typeBean = new TypeBean(id, typename, imageId, sImageId, kind);
             list.add(typeBean);
         }
@@ -57,8 +57,31 @@ public class DBManager {
         contentValues.put("day",accountBean.getDay());
         contentValues.put("kind",accountBean.getKind());
         db.insert("accounttb",null,contentValues);
-        Log.i("test", "insertItemAccounttb: ok");
+    }
 
+    /*
+    * 获取数据库中的全部支出收入情况
+     */
+    public static List<AccountBean>getAccountListFromAccounttb(){
+        List<AccountBean>list = new ArrayList<>();
+        String sql = "select * from accounttb";
+        Cursor cursor = db.rawQuery(sql,null);
+        //便利数据库每一行
+        while(cursor.moveToNext()){
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
+            @SuppressLint("Range") int imageid = cursor.getInt(cursor.getColumnIndex("imageid"));
+            @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex("description"));
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("money"));
+            @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("time"));
+            @SuppressLint("Range") int year = cursor.getInt(cursor.getColumnIndex("year"));
+            @SuppressLint("Range") int month = cursor.getInt(cursor.getColumnIndex("month"));
+            @SuppressLint("Range") int day = cursor.getInt(cursor.getColumnIndex("day"));
+            @SuppressLint("Range") int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            AccountBean accountBean = new AccountBean(id, typename, imageid, description, money, time, year, month, day, kind);
+            list.add(accountBean);
+        }
+        return list;
     }
 
 }
