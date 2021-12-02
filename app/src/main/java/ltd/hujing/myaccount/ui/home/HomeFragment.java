@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;     //展示最近收支
     List<AccountBean> mDatas;
+    MyRecycleViewAdapter adapter;
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,15 +46,23 @@ public class HomeFragment extends Fragment {
             }
         });
         mDatas = new ArrayList<>();
+        loadDBDate();
         //获取recycleView
         recyclerView = root.findViewById(R.id.home_recycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         //设置Adapter
-        recyclerView.setAdapter(new MyRecycleViewAdapter(mDatas));
-
+        adapter = new MyRecycleViewAdapter(mDatas);
+        recyclerView.setAdapter(adapter);
 
         return root;
+    }
+
+
+    private void loadDBDate(){
+        List<AccountBean> accountBeans = DBManager.getAccountListFromAccounttb();
+        mDatas.clear();
+        mDatas.addAll(accountBeans);
     }
 
 
@@ -68,15 +77,6 @@ public class HomeFragment extends Fragment {
 
         private List<AccountBean> mDatas;
 
-
-        @SuppressLint("NotifyDataSetChanged")
-        private void loadDBDate(){
-            List<AccountBean> accountBeans = DBManager.getAccountListFromAccounttb();
-            mDatas.clear();
-            mDatas.addAll(accountBeans);
-            MyRecycleViewAdapter.this.notifyDataSetChanged();
-        }
-
         public MyRecycleViewAdapter(List<AccountBean> mDatas) {
             this.mDatas = mDatas;
         }
@@ -86,7 +86,6 @@ public class HomeFragment extends Fragment {
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mainlv, parent,false);
             MyViewHolder viewHolder = null;
-
             return new MyViewHolder(view);
         }
 
