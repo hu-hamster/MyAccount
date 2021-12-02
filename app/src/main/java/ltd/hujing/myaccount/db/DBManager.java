@@ -25,16 +25,16 @@ public class DBManager {
     public static List<TypeBean> getTypeList(int kind){
         List<TypeBean> list = new ArrayList<>();
         //读取typedb表中的数据
-        String sql = "select * from typedb where kind = "+kind;
+        String sql = "select * from typetb where kind = "+kind;
         Cursor cursor = db.rawQuery(sql, null);
         //循环读取图标内容，存储到对象当中
         while(cursor.moveToNext()){
             String typename = cursor.getString(cursor.getColumnIndex("typename"));
-            int imageid = cursor.getInt(cursor.getColumnIndex("imageid"));
-            int simageid = cursor.getInt(cursor.getColumnIndex("simageid"));
-            int kind1 =  cursor.getInt(cursor.getColumnIndex("kind"));
+            int imageId = cursor.getInt(cursor.getColumnIndex("imageId"));
+            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            int kind1 = cursor.getInt(cursor.getColumnIndex("kind"));
             int id = cursor.getInt(cursor.getColumnIndex("id"));
-            TypeBean typeBean = new TypeBean(id,typename,imageid,simageid,kind1);
+            TypeBean typeBean = new TypeBean(id, typename, imageId, sImageId, kind);
             list.add(typeBean);
         }
         return list;

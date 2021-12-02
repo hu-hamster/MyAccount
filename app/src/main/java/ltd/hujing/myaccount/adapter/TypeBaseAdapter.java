@@ -16,7 +16,7 @@ import ltd.hujing.myaccount.db.TypeBean;
 public class TypeBaseAdapter extends BaseAdapter {
     Context context;
     List<TypeBean> mDatas;
-    int selectPos = 0;  //选中位置
+    private int selectPos = 0;  //选中位置
 
     public TypeBaseAdapter(Context context, List<TypeBean> mDatas) {
         this.context = context;
@@ -36,6 +36,14 @@ public class TypeBaseAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public int getSelectPos() {
+        return selectPos;
+    }
+
+    public void setSelectPos(int selectPos) {
+        this.selectPos = selectPos;
     }
 
     @Override

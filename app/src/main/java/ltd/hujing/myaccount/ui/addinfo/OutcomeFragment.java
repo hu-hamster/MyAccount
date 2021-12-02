@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -22,6 +24,7 @@ import java.util.List;
 
 import ltd.hujing.myaccount.R;
 import ltd.hujing.myaccount.adapter.TypeBaseAdapter;
+import ltd.hujing.myaccount.db.AccountBean;
 import ltd.hujing.myaccount.db.DBManager;
 import ltd.hujing.myaccount.db.TypeBean;
 import ltd.hujing.myaccount.utils.KeyBoardUtils;
@@ -37,6 +40,8 @@ public class OutcomeFragment extends Fragment {
     private TextView typeTv,descriptionTv,timeTv;
     private GridView typeGv;
     private List<TypeBean> typeBeanList;
+    private TypeBaseAdapter adapter;
+    private AccountBean accountBean;     //将需要插入到记账本当中的数据保存成对象的形式
 
     public void initView(View view){
         keyboardView = view.findViewById(R.id.frag_record_keyboard);
@@ -74,7 +79,7 @@ public class OutcomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            
         }
     }
 
@@ -89,11 +94,29 @@ public class OutcomeFragment extends Fragment {
         initView(root);
         //添加给GridView填充数据的方法
         loadDataToGV();
+        setGVLister();
         return root;
     }
+    //设置GridView每一项的点击事件
+    private void setGVLister() {
+        typeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.setSelectPos(position);
+                adapter.notifyDataSetChanged();      //提示绘制发生变化
+                TypeBean typeBean = typeBeanList.get(position);
+                String typename = typeBean.getTypename();
+                typeTv.setText(typename);
+                int imageId = typeBean.getImageid();
+                typeIv.setImageResource(imageId);
+            }
+        });
+    }
+
     //给GridView填充数据
     private void loadDataToGV() {
         typeBeanList = new ArrayList<>();
+        adapter = new TypeBaseAdapter(getContext(),typeBeanList);
         TypeBaseAdapter adapter = new TypeBaseAdapter(getContext(),typeBeanList);
         typeGv.setAdapter(adapter);
         //获取数据库当中的数据源
