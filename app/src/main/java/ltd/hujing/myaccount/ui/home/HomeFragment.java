@@ -54,7 +54,6 @@ public class HomeFragment extends Fragment {
         //设置Adapter
         adapter = new MyRecycleViewAdapter(mDatas);
         recyclerView.setAdapter(adapter);
-
         return root;
     }
 
@@ -65,7 +64,12 @@ public class HomeFragment extends Fragment {
         mDatas.addAll(accountBeans);
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadDBDate();
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     public void onDestroyView() {

@@ -149,6 +149,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
                     return;
                 }
                 double money = Double.parseDouble(moneyStr);
+
                 accountBean.setMoney(money);
                 saveAccountToDB();
                 //返回上级界面
