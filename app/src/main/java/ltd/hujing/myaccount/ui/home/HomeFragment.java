@@ -1,15 +1,19 @@
 package ltd.hujing.myaccount.ui.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,6 +33,11 @@ import ltd.hujing.myaccount.db.DBManager;
 import ltd.hujing.myaccount.ui.addinfo.OutcomeFragment;
 import ltd.hujing.myaccount.ui.addinfo.addincome;
 
+
+/*
+* 主界面模块，recycleview实现条例显示
+* 当前任务：实现改查
+ */
 public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;     //展示最近收支
@@ -218,21 +227,6 @@ public class HomeFragment extends Fragment {
                 setTimeTv(view.findViewById(R.id.item_mainlv_tv_time));
                 setMoneyTv(view.findViewById(R.id.item_mainlv_tv_money));
                 view.setOnCreateContextMenuListener(this);
-//                view.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                        int position1=getAdapterPosition();
-//                        int position=(position1 - 1);
-//                        Intent intent;
-//                        intent=new Intent(HomeFragment.this.getContext(), OutcomeFragment.class);
-//                        intent.putExtra("num",myItems.get(position).getNum());
-//                        intent.putExtra("res",myItems.get(position).getCoverResourceId());
-//                        intent.putExtra("text",myItems.get(position).getText());
-//                        intent.putExtra("date",myItems.get(position).getDate());
-//                        launcherDetail.launch(intent);
-//                    }
-//                });
 
 
             }
@@ -284,14 +278,33 @@ public class HomeFragment extends Fragment {
                     case 0:
                         break;
                     case 1:
-                        mDatas.remove(position);
-                        loadDBDate();
-                        adapter.notifyDataSetChanged();
+                        AccountBean accountBean = mDatas.get(position);
+                        showDeleteItemDialog(accountBean);     //删除框
+
+
                         break;
                     case 2:
                         break;
                 }
                 return false;
+            }
+
+            private void showDeleteItemDialog(final AccountBean accountBean) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeFragment.this.getContext());
+                builder.setTitle("提示信息").setMessage("是否删除该信息")
+                        .setNegativeButton("取消",null)
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int clickId = accountBean.getId();
+                                //删除
+                                DBManager.deleteItemFromAccounttbById(clickId);
+                                mDatas.remove(accountBean);        //实时刷新，移除集合当中的对象
+                                notifyDataSetChanged();    //更新数据
+                                setTopTvShow();
+                            }
+                        });
+                builder.create().show();    //显示对话框
             }
 
             @Override
@@ -307,4 +320,5 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
 }

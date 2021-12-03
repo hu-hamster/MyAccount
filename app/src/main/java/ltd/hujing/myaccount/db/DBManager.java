@@ -62,6 +62,10 @@ public class DBManager {
     /*
     * 向记账表中删除一条元素
      */
+    public static int deleteItemFromAccounttbById(int id){
+        int i = db.delete("accounttb", "id=?", new String[]{id + ""});
+        return i;
+    }
 
     /*
     * 获取数据库中的全部支出收入情况

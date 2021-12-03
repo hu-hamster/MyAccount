@@ -32,6 +32,7 @@ import ltd.hujing.myaccount.utils.SelectTimeDialog;
 
 /**
  * 基础模块
+ * 存在bug：如果光点击确认不主动设置时间，数据库中的年月日有问题
  */
 public abstract class BaseRecordFragment extends Fragment implements View.OnClickListener {
 
