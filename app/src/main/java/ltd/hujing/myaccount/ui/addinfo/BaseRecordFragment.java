@@ -132,6 +132,8 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         typeTv = view.findViewById(R.id.frag_record_tv_type);
         descriptionTv = view.findViewById(R.id.frag_record_tv_description);
         timeTv = view.findViewById(R.id.frag_record_tv_time);
+        //初始化当前时间
+        setInitTime();
         //设置备注和时间的点击事件
         descriptionTv.setOnClickListener(this);
         timeTv.setOnClickListener(this);
@@ -224,7 +226,6 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     public void loadDataToGV() {
         typeBeanList = new ArrayList<>();
         adapter = new TypeBaseAdapter(getContext(),typeBeanList);
-        TypeBaseAdapter adapter = new TypeBaseAdapter(getContext(),typeBeanList);
         typeGv.setAdapter(adapter);
     }
 

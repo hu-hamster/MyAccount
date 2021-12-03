@@ -32,10 +32,21 @@
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/menu/activity_main_drawer.xml" value="0.5541666666666667" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/menu/main.xml" value="0.346875" />
         <entry key="..\:/AndroidStudio/MyAccount/app/src/main/res/xml/key.xml" value="0.5005208333333333" />
+        <entry key="app/src/main/res/layout/activity_addincome.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/dialog_description.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/dialog_time.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/fragment_outcome.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/item_header.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/item_mainlv.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/item_recordfrag_gv.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.16770833333333332" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
