@@ -64,7 +64,7 @@ public class DBManager {
      */
     public static List<AccountBean>getAccountListFromAccounttb(){
         List<AccountBean>list = new ArrayList<>();
-        String sql = "select * from accounttb";
+        String sql = "select * from accounttb order by id desc";   //逆序查找
         Cursor cursor = db.rawQuery(sql,null);
         //便利数据库每一行
         while(cursor.moveToNext()){

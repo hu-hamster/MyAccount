@@ -13,6 +13,7 @@ public class OutcomeFragment extends BaseRecordFragment{
     public void saveAccountToDB() {
         AccountBean accountBean = getAccountBean();
         accountBean.setKind(0);
+        accountBean.setMoney(-1*accountBean.getMoney());
         DBManager.insertItemAccounttb(accountBean);
     }
 

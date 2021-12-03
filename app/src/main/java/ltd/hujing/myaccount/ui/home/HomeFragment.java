@@ -1,6 +1,5 @@
 package ltd.hujing.myaccount.ui.home;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -75,39 +74,106 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+
+
     }
 
     private class MyRecycleViewAdapter extends RecyclerView.Adapter {
-
+        public static final int ITEM_TYPE_HEADER = 0;
+        public static final int ITEM_TYPE_CONTENT = 1;
+        private int mHeaderCount = 1;      //定义头部View个数
         private List<AccountBean> mDatas;
 
         public MyRecycleViewAdapter(List<AccountBean> mDatas) {
             this.mDatas = mDatas;
         }
 
+        public boolean isHeaderView(int position) {
+            return mHeaderCount != 0 && position < mHeaderCount;
+        }
+        //判断当前item类型
+        @Override
+        public int getItemViewType(int position) {
+            if (mHeaderCount != 0 && position < mHeaderCount) {
+                //头部View
+                return ITEM_TYPE_HEADER;
+            }
+            else{
+                //内容View
+                return ITEM_TYPE_CONTENT;
+            }
+        }
+
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mainlv, parent,false);
-            MyViewHolder viewHolder = null;
-            return new MyViewHolder(view);
+            View view;
+            if(viewType == ITEM_TYPE_HEADER){
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_header,parent,false);
+                return new HeaderViewHolder(view);
+            }else{
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mainlv, parent,false);
+                return new MyViewHolder(view);
+            }
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            MyViewHolder viewHolder = (MyViewHolder) holder;
-            viewHolder.getTypeIv().setImageResource(mDatas.get(position).getImageid());
-            viewHolder.getTypeTv().setText(mDatas.get(position).getTypename());
-            viewHolder.getDescriptionTv().setText(mDatas.get(position).getDescription());
-            viewHolder.getMoneyTv().setText(String.valueOf(mDatas.get(position).getMoney()));
-            viewHolder.getTimeTv().setText(mDatas.get(position).getTime());
+            if (holder instanceof HeaderViewHolder){
+                HeaderViewHolder viewHolder = (HeaderViewHolder) holder;
+//                viewHolder.getAlltv().setText(0);
+
+            }else{
+                MyViewHolder viewHolder = (MyViewHolder) holder;
+                viewHolder.getTypeIv().setImageResource(mDatas.get(position).getImageid());
+                viewHolder.getTypeTv().setText(mDatas.get(position).getTypename());
+                viewHolder.getDescriptionTv().setText(mDatas.get(position).getDescription());
+                viewHolder.getMoneyTv().setText(String.valueOf(mDatas.get(position).getMoney()));
+                viewHolder.getTimeTv().setText(mDatas.get(position).getTime());
+            }
         }
 
         @Override
         public int getItemCount() {
-            return mDatas.size();
+            return mDatas.size() + mHeaderCount;
         }
+        //头部holder
+        private  class HeaderViewHolder extends RecyclerView.ViewHolder{
 
+
+            private TextView alltv, incometv, outcometv;
+            public HeaderViewHolder(@NonNull View view) {
+                super(view);
+                setAlltv(view.findViewById(R.id.item_header_all));
+                setIncometv(view.findViewById(R.id.item_header_income));
+                setOutcometv(view.findViewById(R.id.item_header_outcome));
+            }
+
+            public TextView getAlltv() {
+                return alltv;
+            }
+
+            public void setAlltv(TextView alltv) {
+                this.alltv = alltv;
+            }
+
+            public TextView getIncometv() {
+                return incometv;
+            }
+
+            public void setIncometv(TextView incometv) {
+                this.incometv = incometv;
+            }
+
+            public TextView getOutcometv() {
+                return outcometv;
+            }
+
+            public void setOutcometv(TextView outcometv) {
+                this.outcometv = outcometv;
+            }
+        }
+        //内容holder
         private class MyViewHolder extends RecyclerView.ViewHolder {
             private ImageView typeIv;
             private TextView typeTv;
