@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import ltd.hujing.myaccount.R;
@@ -30,6 +32,13 @@ public class HomeFragment extends Fragment {
     List<AccountBean> mDatas;
     MyRecycleViewAdapter adapter;
     private FragmentHomeBinding binding;
+    double incomeMoney;
+    double outcomeMoney;
+    double allMoney;
+    int year;
+    int month;
+    int day;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,12 +49,14 @@ public class HomeFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(root.getContext(), addincome.class);
+                Intent intent = new Intent(HomeFragment.this.getActivity(), addincome.class);
                 startActivity(intent);
             }
         });
+        initTime();
         mDatas = new ArrayList<>();
         loadDBDate();
+        setTopTvShow();
         //获取recycleView
         recyclerView = root.findViewById(R.id.home_recycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
@@ -63,19 +74,34 @@ public class HomeFragment extends Fragment {
         mDatas.addAll(accountBeans);
     }
 
+    /* 获取今日的具体时间*/
+    private void initTime() {
+        Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH)+1;
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         loadDBDate();
+        setTopTvShow();
         adapter.notifyDataSetChanged();
+
+    }
+    //设置头布局当中文本内容的显示
+    private void setTopTvShow() {
+        incomeMoney = DBManager.getSumMoneyOneMonth(year,month,1);
+        System.out.println(incomeMoney);
+        outcomeMoney = DBManager.getSumMoneyOneMonth(year,month,0);
+        allMoney = incomeMoney+outcomeMoney;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-
-
     }
 
     private class MyRecycleViewAdapter extends RecyclerView.Adapter {
@@ -109,10 +135,10 @@ public class HomeFragment extends Fragment {
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view;
             if(viewType == ITEM_TYPE_HEADER){
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_header,parent,false);
+                view = LayoutInflater.from(HomeFragment.this.getContext()).inflate(R.layout.item_header,parent,false);
                 return new HeaderViewHolder(view);
             }else{
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mainlv, parent,false);
+                view = LayoutInflater.from(HomeFragment.this.getContext()).inflate(R.layout.item_mainlv, parent,false);
                 return new MyViewHolder(view);
             }
         }
@@ -121,15 +147,16 @@ public class HomeFragment extends Fragment {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             if (holder instanceof HeaderViewHolder){
                 HeaderViewHolder viewHolder = (HeaderViewHolder) holder;
-//                viewHolder.getAlltv().setText(0);
-
+                viewHolder.getAlltv().setText("￥ "+ allMoney);
+                viewHolder.getIncometv().setText("￥ "+ incomeMoney);
+                viewHolder.getOutcometv().setText("￥ "+ outcomeMoney);
             }else{
                 MyViewHolder viewHolder = (MyViewHolder) holder;
-                viewHolder.getTypeIv().setImageResource(mDatas.get(position).getImageid());
-                viewHolder.getTypeTv().setText(mDatas.get(position).getTypename());
-                viewHolder.getDescriptionTv().setText(mDatas.get(position).getDescription());
-                viewHolder.getMoneyTv().setText(String.valueOf(mDatas.get(position).getMoney()));
-                viewHolder.getTimeTv().setText(mDatas.get(position).getTime());
+                viewHolder.getTypeIv().setImageResource(mDatas.get(position-1).getImageid());
+                viewHolder.getTypeTv().setText(mDatas.get(position-1).getTypename());
+                viewHolder.getDescriptionTv().setText(mDatas.get(position-1).getDescription());
+                viewHolder.getMoneyTv().setText(String.valueOf(mDatas.get(position-1).getMoney()));
+                viewHolder.getTimeTv().setText(mDatas.get(position-1).getTime());
             }
         }
 

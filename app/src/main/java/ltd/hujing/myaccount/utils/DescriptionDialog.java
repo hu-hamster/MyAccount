@@ -39,7 +39,8 @@ public class DescriptionDialog extends Dialog implements View.OnClickListener {
         editText = findViewById(R.id.dialog_description_et);
         ensurebutton = findViewById(R.id.dialog_description_btn_ensure);
         cancelbutton = findViewById(R.id.dialog_description_btn_cancel);
-
+        ensurebutton.setOnClickListener(this);
+        cancelbutton.setOnClickListener(this);
     }
     public interface OnEnsureListener{
         public void onEnsure();

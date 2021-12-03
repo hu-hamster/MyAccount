@@ -231,9 +231,11 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            //点击备注
             case R.id.frag_record_tv_description:
                 showDescriptionDialog();
                 break;
+            //点击时间
             case R.id.frag_record_tv_time:
                 showTimeDialog();
                 break;
