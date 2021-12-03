@@ -1,4 +1,4 @@
-package ltd.hujing.myaccount.ui.addinfo;
+package ltd.hujing.myaccount.addinfo;
 
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
@@ -24,7 +24,6 @@ import java.util.List;
 import ltd.hujing.myaccount.R;
 import ltd.hujing.myaccount.adapter.TypeBaseAdapter;
 import ltd.hujing.myaccount.db.AccountBean;
-import ltd.hujing.myaccount.db.DBManager;
 import ltd.hujing.myaccount.db.TypeBean;
 import ltd.hujing.myaccount.utils.DescriptionDialog;
 import ltd.hujing.myaccount.utils.KeyBoardUtils;
@@ -181,7 +180,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_outcome, container, false);
+        View root = inflater.inflate(R.layout.fragment_baserecord, container, false);
         initView(root);
         //添加给GridView填充数据的方法
         loadDataToGV();

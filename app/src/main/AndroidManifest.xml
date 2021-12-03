@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAccount">
         <activity
-            android:name=".ui.addinfo.addincome"
+            android:name=".ui.home.DetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".addinfo.addincome"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

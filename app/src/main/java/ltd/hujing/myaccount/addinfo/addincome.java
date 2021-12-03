@@ -1,4 +1,4 @@
-package ltd.hujing.myaccount.ui.addinfo;
+package ltd.hujing.myaccount.addinfo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;

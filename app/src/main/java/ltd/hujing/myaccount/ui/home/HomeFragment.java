@@ -6,14 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,11 +24,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import ltd.hujing.myaccount.R;
-import ltd.hujing.myaccount.databinding.FragmentHomeBinding;
+import ltd.hujing.myaccount.addinfo.addincome;
 import ltd.hujing.myaccount.db.AccountBean;
 import ltd.hujing.myaccount.db.DBManager;
-import ltd.hujing.myaccount.ui.addinfo.OutcomeFragment;
-import ltd.hujing.myaccount.ui.addinfo.addincome;
 
 
 /*
@@ -43,7 +38,6 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;     //展示最近收支
     List<AccountBean> mDatas;
     MyRecycleViewAdapter adapter;
-    private FragmentHomeBinding binding;
     double incomeMoney;
     double outcomeMoney;
     double allMoney;
@@ -113,7 +107,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 
     private class MyRecycleViewAdapter extends RecyclerView.Adapter {
@@ -276,14 +269,14 @@ public class HomeFragment extends Fragment {
                 int position = getAdapterPosition()-1;
                 switch (menuItem.getItemId()){
                     case 0:
+                        //查看信息
                         break;
                     case 1:
                         AccountBean accountBean = mDatas.get(position);
                         showDeleteItemDialog(accountBean);     //删除框
-
-
                         break;
                     case 2:
+                        //修改信息
                         break;
                 }
                 return false;
@@ -311,7 +304,7 @@ public class HomeFragment extends Fragment {
             public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
                 MenuItem menuItemDetail=contextMenu.add(ContextMenu.NONE, 0, ContextMenu.NONE, "详情");
                 MenuItem menuItemDelete=contextMenu.add(ContextMenu.NONE, 1, ContextMenu.NONE, "删除");
-                MenuItem menuItemEdit=contextMenu.add(ContextMenu.NONE, 2, ContextMenu.NONE, "编辑");
+                MenuItem menuItemEdit=contextMenu.add(ContextMenu.NONE, 2, ContextMenu.NONE, "修改");
 
                 menuItemDetail.setOnMenuItemClickListener(this);
                 menuItemDelete.setOnMenuItemClickListener(this);

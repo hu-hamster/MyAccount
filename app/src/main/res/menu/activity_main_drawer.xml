@@ -16,5 +16,9 @@
             android:id="@+id/nav_analyse"
             android:icon="@mipmap/menu_analyse_statistic"
             android:title="@string/menu_analyse" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@mipmap/other"
+            android:title="关于软件" />
     </group>
 </menu>

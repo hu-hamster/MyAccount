@@ -15,12 +15,18 @@
         android:id="@+id/nav_history"
         android:name="ltd.hujing.myaccount.ui.history.HistoryFragment"
         android:label="@string/menu_history"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/nav_analyse"
         android:name="ltd.hujing.myaccount.ui.analyse.AnalyseFragment"
         android:label="@string/menu_analyse"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="ltd.hujing.myaccount.ui.about.AboutFragment"
+        android:label="关于软件"
+        tools:layout="@layout/fragment_about"/>
 
 </navigation>
