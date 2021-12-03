@@ -60,6 +60,10 @@ public class DBManager {
     }
 
     /*
+    * 向记账表中删除一条元素
+     */
+
+    /*
     * 获取数据库中的全部支出收入情况
      */
     public static List<AccountBean>getAccountListFromAccounttb(){
@@ -108,7 +112,7 @@ public class DBManager {
         Cursor cursor =  db.rawQuery(sql,new String[]{year+"",month+"",kind+""});
         //遍历
         if(cursor.moveToFirst()){
-            double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
             total = money;
         }
         return total;
@@ -123,7 +127,7 @@ public class DBManager {
         Cursor cursor =  db.rawQuery(sql,new String[]{year+"",kind+""});
         //遍历
         if(cursor.moveToFirst()){
-            double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
             total = money;
         }
         return total;

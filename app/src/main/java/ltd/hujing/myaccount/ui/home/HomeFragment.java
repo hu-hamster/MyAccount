@@ -2,7 +2,9 @@ package ltd.hujing.myaccount.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
@@ -24,6 +26,7 @@ import ltd.hujing.myaccount.R;
 import ltd.hujing.myaccount.databinding.FragmentHomeBinding;
 import ltd.hujing.myaccount.db.AccountBean;
 import ltd.hujing.myaccount.db.DBManager;
+import ltd.hujing.myaccount.ui.addinfo.OutcomeFragment;
 import ltd.hujing.myaccount.ui.addinfo.addincome;
 
 public class HomeFragment extends Fragment {
@@ -201,7 +204,7 @@ public class HomeFragment extends Fragment {
             }
         }
         //内容holder
-        private class MyViewHolder extends RecyclerView.ViewHolder {
+        private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener  {
             private ImageView typeIv;
             private TextView typeTv;
             private TextView descriptionTv;
@@ -214,6 +217,23 @@ public class HomeFragment extends Fragment {
                 setDescriptionTv(view.findViewById(R.id.item_mainlv_tv_description));
                 setTimeTv(view.findViewById(R.id.item_mainlv_tv_time));
                 setMoneyTv(view.findViewById(R.id.item_mainlv_tv_money));
+                view.setOnCreateContextMenuListener(this);
+//                view.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                        int position1=getAdapterPosition();
+//                        int position=(position1 - 1);
+//                        Intent intent;
+//                        intent=new Intent(HomeFragment.this.getContext(), OutcomeFragment.class);
+//                        intent.putExtra("num",myItems.get(position).getNum());
+//                        intent.putExtra("res",myItems.get(position).getCoverResourceId());
+//                        intent.putExtra("text",myItems.get(position).getText());
+//                        intent.putExtra("date",myItems.get(position).getDate());
+//                        launcherDetail.launch(intent);
+//                    }
+//                });
+
 
             }
 
@@ -255,6 +275,35 @@ public class HomeFragment extends Fragment {
 
             public void setMoneyTv(TextView moneyTv) {
                 this.moneyTv = moneyTv;
+            }
+
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                int position = getAdapterPosition()-1;
+                switch (menuItem.getItemId()){
+                    case 0:
+                        break;
+                    case 1:
+                        mDatas.remove(position);
+                        loadDBDate();
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 2:
+                        break;
+                }
+                return false;
+            }
+
+            @Override
+            public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+                MenuItem menuItemDetail=contextMenu.add(ContextMenu.NONE, 0, ContextMenu.NONE, "详情");
+                MenuItem menuItemDelete=contextMenu.add(ContextMenu.NONE, 1, ContextMenu.NONE, "删除");
+                MenuItem menuItemEdit=contextMenu.add(ContextMenu.NONE, 2, ContextMenu.NONE, "编辑");
+
+                menuItemDetail.setOnMenuItemClickListener(this);
+                menuItemDelete.setOnMenuItemClickListener(this);
+                menuItemEdit.setOnMenuItemClickListener(this);
+
             }
         }
     }
