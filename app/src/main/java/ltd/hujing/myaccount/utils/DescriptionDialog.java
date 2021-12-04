@@ -78,7 +78,6 @@ public class DescriptionDialog extends Dialog implements View.OnClickListener {
         window.setBackgroundDrawableResource(android.R.color.transparent);
         window.setAttributes(wlp);
         handler.sendEmptyMessageDelayed(1,100);
-
     }
     Handler handler = new Handler(){
         @SuppressLint("HandlerLeak")

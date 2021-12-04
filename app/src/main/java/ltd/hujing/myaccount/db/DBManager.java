@@ -93,6 +93,29 @@ public class DBManager {
     }
 
     /*
+    * 获取记账表中某一个月的所有支出或者收入情况
+     */
+    public static List<AccountBean>getAccountListOneMonthFromAccounttb(int year, int month){
+        List<AccountBean>list = new ArrayList<>();
+        String sql = "select * from accounttb where year=? and month=? order by id desc";   //逆序查找
+        Cursor cursor = db.rawQuery(sql,new String[]{year+"",month+""});
+        //便利数据库每一行
+        while(cursor.moveToNext()){
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
+            @SuppressLint("Range") int imageid = cursor.getInt(cursor.getColumnIndex("imageid"));
+            @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex("description"));
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("money"));
+            @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("time"));
+            @SuppressLint("Range") int day = cursor.getInt(cursor.getColumnIndex("day"));
+            @SuppressLint("Range") int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            AccountBean accountBean = new AccountBean(id, typename, imageid, description, money, time, year, month, day, kind);
+            list.add(accountBean);
+        }
+        return list;
+    }
+
+    /*
     * 获取某一天的支出或者收入的总金额   kind： 支出-0  收入-1
      */
     public static double getSumMoneyOneDay(int year,int month,int day,int kind) {
@@ -150,6 +173,28 @@ public class DBManager {
             total = money;
         }
         return total;
+    }
+
+    /*
+    * 查询记账的表当中有几个年份信息
+     */
+    public static List<Integer> getYearListFromAccounttb(){
+        List<Integer> list = new ArrayList<>();
+        String sql = "select distinct(year) from accounttb order by year asc";
+        Cursor cursor = db.rawQuery(sql,null);
+        while (cursor.moveToNext()){
+            @SuppressLint("Range") int year = cursor.getInt(cursor.getColumnIndex("year"));
+            list.add(year);
+        }
+        return list;
+    }
+
+    /*
+    * 删除accounttb表格当中的所有数据
+     */
+    public static void deleteAllAccount(){
+        String sql = "delete from accounttb";
+        db.execSQL(sql);
     }
 
 }

@@ -8,7 +8,7 @@
         android:id="@+id/frag_record_r1_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="#ffffff"
         android:padding="10dp">
 
         <ImageView
@@ -34,7 +34,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="#FFFFFF"
             android:inputType="number" />
 
 
@@ -45,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/frag_record_r1_top"
-        android:background="#f3f3f3"/>
+        android:background="#f3f3f3" />
 
     <GridView
         android:id="@+id/frag_record_gv"

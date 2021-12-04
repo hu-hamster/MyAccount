@@ -11,6 +11,9 @@ import android.widget.EditText;
 
 import ltd.hujing.myaccount.R;
 
+/*
+* 自定义软键盘操作
+ */
 public class KeyBoardUtils {
     private final Keyboard keyboard;   //自定义键盘
     private KeyboardView keyboardView;

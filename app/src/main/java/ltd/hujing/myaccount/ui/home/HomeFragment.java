@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -31,7 +34,7 @@ import ltd.hujing.myaccount.db.DBManager;
 
 /*
 * 主界面模块，recycleview实现条例显示
-* 当前任务：实现改查
+* 当前任务：实现查找
  */
 public class HomeFragment extends Fragment {
 
@@ -44,6 +47,12 @@ public class HomeFragment extends Fragment {
     int year;
     int month;
     int day;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //菜单可见
+        setHasOptionsMenu(true);
+    }
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -267,12 +276,12 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 int position = getAdapterPosition()-1;
+                Intent intent;
                 switch (menuItem.getItemId()){
                     case 0:
                         //查看信息
                         System.out.println(String.valueOf(mDatas.get(position).getMoney()));
-                        Intent intent = new Intent(HomeFragment.this.getContext(),DetailsActivity.class);
-
+                        intent = new Intent(HomeFragment.this.getContext(),DetailsActivity.class);
                         intent.putExtra("details_tv_amount",String.valueOf(mDatas.get(position).getMoney()));
                         intent.putExtra("details_tv_typename",mDatas.get(position).getTypename());
                         intent.putExtra("details_tv_account_type",mDatas.get(position).getKind()==1?"收入":"支出");
@@ -280,7 +289,6 @@ public class HomeFragment extends Fragment {
                         intent.putExtra("details_tv_balance",DBManager.getSumMoneyAll()+"");
                         intent.putExtra("details_tv_description",mDatas.get(position).getDescription());
                         intent.putExtra("details_iv_type",mDatas.get(position).getImageid());
-
                         startActivity(intent);
                         break;
                     case 1:
@@ -289,6 +297,8 @@ public class HomeFragment extends Fragment {
                         break;
                     case 2:
                         //修改信息
+                        intent = new Intent(HomeFragment.this.getActivity(), addincome.class);
+                        startActivity(intent);
                         break;
                 }
                 return false;
@@ -317,13 +327,28 @@ public class HomeFragment extends Fragment {
                 MenuItem menuItemDetail=contextMenu.add(ContextMenu.NONE, 0, ContextMenu.NONE, "详情");
                 MenuItem menuItemDelete=contextMenu.add(ContextMenu.NONE, 1, ContextMenu.NONE, "删除");
                 MenuItem menuItemEdit=contextMenu.add(ContextMenu.NONE, 2, ContextMenu.NONE, "修改");
-
                 menuItemDetail.setOnMenuItemClickListener(this);
                 menuItemDelete.setOnMenuItemClickListener(this);
                 menuItemEdit.setOnMenuItemClickListener(this);
 
             }
         }
+    }
+
+    //为fragment设置菜单项
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.home_to_top, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==R.id.action_to_top){
+            Toast.makeText(this.getContext(),"123",Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

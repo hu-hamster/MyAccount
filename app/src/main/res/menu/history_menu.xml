@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/history_calendar"
+        android:orderInCategory="100"
+        android:icon="@mipmap/calendar"
+        android:title="日历"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/history_delete"
+        android:orderInCategory="100"
+        android:title="删除全部记录"
+        app:showAsAction="always" />
+
+</menu>

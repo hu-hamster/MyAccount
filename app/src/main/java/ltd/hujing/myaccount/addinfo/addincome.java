@@ -18,6 +18,9 @@ import java.util.List;
 
 import ltd.hujing.myaccount.R;
 
+/*
+* 添加item的具体实现，主要使用tablayouth加viewpager2
+ */
 public class addincome extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;

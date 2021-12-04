@@ -4,11 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.analyse.AnalyseFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#f3f3f3"
+        android:layout_height="match_parent">
+
+
+    </LinearLayout>
+
+
 
 </FrameLayout>

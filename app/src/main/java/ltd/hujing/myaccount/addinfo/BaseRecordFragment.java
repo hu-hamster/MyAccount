@@ -134,6 +134,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         timeTv = view.findViewById(R.id.frag_record_tv_time);
         //初始化当前时间
         setInitTime();
+        //初始化
         //设置备注和时间的点击事件
         descriptionTv.setOnClickListener(this);
         timeTv.setOnClickListener(this);
@@ -151,7 +152,6 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
                     return;
                 }
                 double money = Double.parseDouble(moneyStr);
-
                 accountBean.setMoney(money);
                 saveAccountToDB();
                 //返回上级界面
