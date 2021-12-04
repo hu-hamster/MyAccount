@@ -191,7 +191,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     //获取当前时间，显示在timeTv上
     private void setInitTime() {
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String time = simpleDateFormat.format(date);
         timeTv.setText(time);
         accountBean.setTime(time);

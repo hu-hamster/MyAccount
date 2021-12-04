@@ -14,9 +14,11 @@
         android:layout_height="50dp">
 
         <ImageView
+            android:id="@+id/details_back"
             android:layout_width="38dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
+            android:onClick="onClick"
             android:src="@mipmap/add_item_back" />
     </RelativeLayout>
 
@@ -32,14 +34,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="记账金额："
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/details_tv_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:text="0.00"
-            android:textSize="20dp"/>
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
@@ -55,14 +59,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="账目分类："
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/details_tv_typename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="0.00"
-            android:textSize="20dp"/>
+            android:layout_alignParentEnd="true"
+            android:text="其他"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/details_iv_type"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="15dp"
+            android:layout_toLeftOf="@id/details_tv_typename"
+            android:src="@mipmap/other" />
 
     </RelativeLayout>
 
@@ -78,14 +93,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="账目类型："
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/details_tv_account_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="0.00"
-            android:textSize="20dp"/>
+            android:layout_alignParentEnd="true"
+            android:text="支出"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 
@@ -101,14 +119,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="预算类型："
-            android:textSize="20dp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="0.00"
-            android:textSize="20dp"/>
+            android:layout_alignParentEnd="true"
+            android:text="计入预算"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 
@@ -123,15 +143,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="记账金额"
-            android:textSize="25dp" />
+            android:text="所属账户："
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="0.00"
-            android:textSize="25dp"/>
+            android:layout_alignParentEnd="true"
+            android:text="现金"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 
@@ -146,15 +168,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="记账金额"
-            android:textSize="25dp" />
+            android:text="创建日期："
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/details_tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="0.00"
-            android:textSize="25dp"/>
+            android:layout_alignParentEnd="true"
+            android:text="2021-11-02"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 
@@ -169,40 +194,46 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="记账金额"
-            android:textSize="25dp" />
+            android:text="账户余额："
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/details_tv_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:text="0.00"
-            android:textSize="25dp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="#ffffff"
-        android:layout_marginTop="5dp">
+        android:orientation="vertical"
+        android:padding="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="记账金额"
-            android:textSize="25dp" />
+            android:text="备注"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/details_tv_description"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="0.00"
-            android:textSize="25dp"/>
+            android:text="未填写"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
  </LinearLayout>

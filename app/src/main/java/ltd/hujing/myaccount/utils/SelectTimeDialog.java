@@ -85,7 +85,7 @@ public class SelectTimeDialog extends Dialog implements View.OnClickListener {
                 if(minute<10){
                     minuteStr = "0"+minuteStr;
                 }
-                String timeFormat = year + "年" + monStr + "月" + dayStr + "日 "+hourStr + ":" +minuteStr;
+                String timeFormat = year + "-" + monStr + "-" + dayStr + " "+hourStr + ":" +minuteStr;
                 if(onEnsureListener!=null){
                     onEnsureListener.onEnsure(timeFormat,year,month,day);
                 }

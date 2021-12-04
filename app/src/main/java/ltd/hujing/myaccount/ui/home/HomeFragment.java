@@ -270,6 +270,18 @@ public class HomeFragment extends Fragment {
                 switch (menuItem.getItemId()){
                     case 0:
                         //查看信息
+                        System.out.println(String.valueOf(mDatas.get(position).getMoney()));
+                        Intent intent = new Intent(HomeFragment.this.getContext(),DetailsActivity.class);
+
+                        intent.putExtra("details_tv_amount",String.valueOf(mDatas.get(position).getMoney()));
+                        intent.putExtra("details_tv_typename",mDatas.get(position).getTypename());
+                        intent.putExtra("details_tv_account_type",mDatas.get(position).getKind()==1?"收入":"支出");
+                        intent.putExtra("details_tv_time",mDatas.get(position).getTime());
+                        intent.putExtra("details_tv_balance",DBManager.getSumMoneyAll()+"");
+                        intent.putExtra("details_tv_description",mDatas.get(position).getDescription());
+                        intent.putExtra("details_iv_type",mDatas.get(position).getImageid());
+
+                        startActivity(intent);
                         break;
                     case 1:
                         AccountBean accountBean = mDatas.get(position);

@@ -101,7 +101,7 @@ public class DBManager {
         Cursor cursor =  db.rawQuery(sql,new String[]{year+"",month+"",day+"",kind+""});
         //遍历
         if(cursor.moveToFirst()){
-            double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
             total = money;
         }
         return total;
@@ -129,6 +129,21 @@ public class DBManager {
         double total = 0.0;
         String sql = "select sum(money) from accounttb where year=? and kind=?";
         Cursor cursor =  db.rawQuery(sql,new String[]{year+"",kind+""});
+        //遍历
+        if(cursor.moveToFirst()){
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
+            total = money;
+        }
+        return total;
+    }
+
+    /*
+    * 获取数据库中全部条例的总金额
+     */
+    public static double getSumMoneyAll(){
+        double total = 0.0;
+        String sql = "select sum(money) from accounttb";
+        Cursor cursor = db.rawQuery(sql,null);
         //遍历
         if(cursor.moveToFirst()){
             @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
