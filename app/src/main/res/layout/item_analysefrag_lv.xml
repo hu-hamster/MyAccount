@@ -20,13 +20,14 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:textStyle="bold"/>
+
     <TextView
         android:id="@+id/item_analysefrag_tv_pert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="22.3%"
-        android:textSize="16sp"
-        android:layout_centerInParent="true"/>
+        android:textSize="16sp" />
     <TextView
         android:id="@+id/item_analysefrag_tv_sum"
         android:layout_width="wrap_content"

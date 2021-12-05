@@ -7,6 +7,7 @@
         android:id="@+id/item_analysefrag_chart"
         android:layout_width="match_parent"
         android:layout_height="300dp">
+
     </com.github.mikephil.charting.charts.BarChart>
 
     <TextView
