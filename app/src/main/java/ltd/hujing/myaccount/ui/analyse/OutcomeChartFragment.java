@@ -231,6 +231,7 @@ public class OutcomeChartFragment extends Fragment {
             barChart.setExtraOffsets(20,20,20,20);
             //设置坐标轴
             setAxis(year, month);
+            setAxisData(year,month);
         }
 
 

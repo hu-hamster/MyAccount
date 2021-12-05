@@ -230,6 +230,7 @@ public class IncomeChartFragment extends Fragment {
             barChart.setExtraOffsets(20, 20, 20, 20);
             //设置坐标轴
             setAxis(year, month);
+            setAxisData(year,month);
         }
 
 
@@ -319,7 +320,6 @@ public class IncomeChartFragment extends Fragment {
                     }
                 });
                 sets.add(barDataSet1);
-
                 BarData barData = new BarData(sets);
                 barData.setBarWidth(0.2f); // 设置柱子的宽度
                 barChart.setData(barData);
