@@ -76,6 +76,7 @@ public class HomeFragment extends Fragment {
         recyclerView = root.findViewById(R.id.home_recycle);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+
         //设置Adapter
         adapter = new MyRecycleViewAdapter(mDatas);
         recyclerView.setAdapter(adapter);

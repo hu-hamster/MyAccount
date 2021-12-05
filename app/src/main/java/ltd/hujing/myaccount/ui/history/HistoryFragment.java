@@ -53,6 +53,7 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //设置菜单可见
         setHasOptionsMenu(true);
     }
 
@@ -257,8 +258,6 @@ public class HistoryFragment extends Fragment {
             }
         }
     }
-
-
 
     //为fragment设置菜单项
     @Override
