@@ -200,7 +200,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         accountBean.setYear(year);
-        accountBean.setMoney(month);
+        accountBean.setMonth(month);
         accountBean.setDay(day);
     }
 

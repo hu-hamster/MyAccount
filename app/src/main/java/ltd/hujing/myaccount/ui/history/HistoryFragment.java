@@ -291,8 +291,10 @@ public class HistoryFragment extends Fragment {
                     .setNegativeButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            DBManager.deleteAllAccount();
                             Toast.makeText(getContext(),"删除成功",Toast.LENGTH_SHORT).show();
+                            mDatas.clear();
+                            adapter.notifyDataSetChanged();    //更新数据
+                            DBManager.deleteAllAccount();
                         }
                     });
             builder.create().show();
