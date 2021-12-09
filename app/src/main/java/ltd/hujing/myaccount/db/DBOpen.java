@@ -11,7 +11,7 @@ import ltd.hujing.myaccount.R;
 public class DBOpen extends SQLiteOpenHelper {
 
     public DBOpen(@Nullable Context context) {
-        super(context,"tally.db",null,1);
+        super(context,"MyAccount.db",null,1);
     }
 
     //创建数据库
