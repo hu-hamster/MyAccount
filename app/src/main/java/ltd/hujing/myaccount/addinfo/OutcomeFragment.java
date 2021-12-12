@@ -8,13 +8,25 @@ import ltd.hujing.myaccount.db.DBManager;
 import ltd.hujing.myaccount.db.TypeBean;
 
 public class OutcomeFragment extends BaseRecordFragment{
+    public OutcomeFragment(int flag, AccountBean accountBean) {
+        this.flag = flag;
+        this.accountBean = accountBean;
+    }
+
     //重载，插入数据
     @Override
     public void saveAccountToDB() {
-        AccountBean accountBean = getAccountBean();
-        accountBean.setKind(0);
-        accountBean.setMoney(-1*accountBean.getMoney());
-        DBManager.insertItemAccounttb(accountBean);
+        if(flag==1){
+            AccountBean accountBean = getAccountBean();
+            accountBean.setKind(0);
+            accountBean.setMoney(-1*Math.abs(accountBean.getMoney()));
+            DBManager.updateItemFromAccounttbByChange(accountBean);
+        }else{
+            AccountBean accountBean = getAccountBean();
+            accountBean.setKind(0);
+            accountBean.setMoney(-1*accountBean.getMoney());
+            DBManager.insertItemAccounttb(accountBean);
+        }
     }
 
     //重写
@@ -25,8 +37,14 @@ public class OutcomeFragment extends BaseRecordFragment{
         List<TypeBean> outlist = DBManager.getTypeList(0);
         getTypeBeanList().addAll(outlist);
         getAdapter().notifyDataSetChanged();
-        getTypeTv().setText("其他");
-        getTypeIv().setImageResource(R.mipmap.other);
+        if(flag==1){
+            getTypeTv().setText(accountBean.getTypename());
+            getTypeIv().setImageResource(accountBean.getImageid());
+        }else{
+            getTypeTv().setText("其他");
+            getTypeIv().setImageResource(R.mipmap.other);
+        }
+
     }
 
 

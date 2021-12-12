@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ltd.hujing.myaccount.R;
+import ltd.hujing.myaccount.db.AccountBean;
+import ltd.hujing.myaccount.db.DBManager;
 
 /*
 * 添加item的具体实现，主要使用tablayouth加viewpager2
@@ -24,25 +27,36 @@ import ltd.hujing.myaccount.R;
 public class addincome extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;
+    private int flag;  //设置修改或添加标志位
+    private int id;    //如果为修改标志位，则获取item的id
+    AccountBean accountBean;  //如果为修改标志位，则获得要修改的item
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addincome);
+        Intent intent = getIntent();
+        flag = intent.getIntExtra("flag",0);
+        accountBean = new AccountBean();
+        if(flag==1){
+            id = intent.getIntExtra("id",-1);
+            accountBean = DBManager.getItemFromAccounttbById(id);
+        }
         ActionBar actionBar = getSupportActionBar();   //隐藏自带标题栏
         if(actionBar != null){
-            actionBar.hide();
+            actionBar.hide(); 
         }
         tabLayout = findViewById(R.id.add_item_tab);
         viewPager2 = findViewById(R.id.add_item_viewpager2);
         //Adapter
-        initPaper();
+        initPaper();  //初始化界面
+        if(flag==1) viewPager2.setCurrentItem(accountBean.getKind());   //如果为修改则选择不同的界面
 
     }
 
     private void initPaper() {
         List<Fragment>fragmentList = new ArrayList<>();
-        IncomeFragment incomefragment = new IncomeFragment();     //收入
-        OutcomeFragment outcomefragment = new OutcomeFragment();    //支出
+        IncomeFragment incomefragment = new IncomeFragment(flag,accountBean);     //收入
+        OutcomeFragment outcomefragment = new OutcomeFragment(flag,accountBean);    //支出
         fragmentList.add(outcomefragment);
         fragmentList.add(incomefragment);
         viewPager2.setAdapter(new FragmentStateAdapter(this) {

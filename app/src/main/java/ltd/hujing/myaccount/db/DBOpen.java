@@ -27,8 +27,6 @@ public class DBOpen extends SQLiteOpenHelper {
                 "imageid integer, description varchar(100),money double,time varchar(60), year integer," +
                 "month integer, day integer, kind integer)";
         db.execSQL(sql);
-
-
     }
 
     private void insertType(SQLiteDatabase db){

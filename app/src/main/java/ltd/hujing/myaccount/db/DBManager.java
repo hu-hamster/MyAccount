@@ -63,6 +63,44 @@ public class DBManager {
     }
 
     /*
+    * 根据id在记账表中取出数据
+     */
+    public static AccountBean getItemFromAccounttbById(int id){
+        AccountBean accountBean = new AccountBean();
+        String sql = "select * from accounttb where id=?";
+        Cursor cursor = db.rawQuery(sql,new String[]{id+""});
+        while(cursor.moveToNext()){
+            @SuppressLint("Range") int imageid = cursor.getInt(cursor.getColumnIndex("imageid"));
+            @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex("description"));
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("money"));
+            @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("time"));
+            @SuppressLint("Range") int day = cursor.getInt(cursor.getColumnIndex("day"));
+            @SuppressLint("Range") int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            @SuppressLint("Range") int year = cursor.getInt(cursor.getColumnIndex("year"));
+            @SuppressLint("Range") int month = cursor.getInt(cursor.getColumnIndex("month"));
+            accountBean = new AccountBean(id, typename, imageid, description, money, time, year, month, day, kind);
+        }
+        return accountBean;
+    }
+    /*
+    * 向记账表中更新一条元素
+     */
+    public static void updateItemFromAccounttbByChange(AccountBean accountBean){
+        ContentValues values = new ContentValues();
+        values.put("typename",accountBean.getTypename());
+        values.put("imageid",accountBean.getImageid());
+        values.put("description",accountBean.getDescription());
+        values.put("money",accountBean.getMoney());
+        values.put("time",accountBean.getTime());
+        values.put("year",accountBean.getYear());
+        values.put("month",accountBean.getMonth());
+        values.put("day",accountBean.getDay());
+        values.put("kind",accountBean.getKind());
+        db.update("accounttb",values,"id=?",new String[]{accountBean.getId()+""});
+    }
+
+    /*
     * 向记账表中删除一条元素
      */
     public static int deleteItemFromAccounttbById(int id){

@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeFragment.this.getActivity(), addincome.class);
+                intent.putExtra("flag",0); //添加标志位
                 startActivity(intent);
             }
         });
@@ -299,6 +300,8 @@ public class HomeFragment extends Fragment {
                     case 2:
                         //修改信息
                         intent = new Intent(HomeFragment.this.getActivity(), addincome.class);
+                        intent.putExtra("flag",1);   //修改标志位
+                        intent.putExtra("id",mDatas.get(position).getId());
                         startActivity(intent);
                         break;
                 }
