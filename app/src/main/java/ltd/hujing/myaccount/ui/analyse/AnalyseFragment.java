@@ -116,8 +116,8 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
         public int getItemCount() {
             return chartFraglist.size();
         }
-    } {
     }
+
 
 
     //统计某年某月的收支情况数据

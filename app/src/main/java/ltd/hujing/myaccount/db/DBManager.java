@@ -186,6 +186,20 @@ public class DBManager {
         return total;
     }
     /*
+    * 获取支出或收入的总金额    kind：  支出-0  收入-1
+     */
+    public static double getSumMoney(int kind){
+        double total = 0.0;
+        String sql = "select sum(money) from accounttb where kind=?";
+        Cursor cursor =  db.rawQuery(sql,new String[]{kind+""});
+        //遍历
+        if(cursor.moveToFirst()){
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
+            total = money;
+        }
+        return total;
+    }
+    /*
     * 统计某月份支出或者收入情况有多少条  支出-0 收入-1
      */
     public static int getCountItemOneMonth(int year,int month,int kind){

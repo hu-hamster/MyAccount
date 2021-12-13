@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment {
         incomeMoney = DBManager.getSumMoneyOneMonth(year,month,1);
         System.out.println(incomeMoney);
         outcomeMoney = DBManager.getSumMoneyOneMonth(year,month,0);
-        allMoney = incomeMoney+outcomeMoney;
+        allMoney = DBManager.getSumMoney(0)+DBManager.getSumMoney(1);
     }
 
     @Override
