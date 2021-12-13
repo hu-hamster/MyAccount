@@ -69,6 +69,11 @@
                 android:layout_marginStart="10dp"/>
 
         </LinearLayout>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/analyse_pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
         
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/analyse_viewpager2"

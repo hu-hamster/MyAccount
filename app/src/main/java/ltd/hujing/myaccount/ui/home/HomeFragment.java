@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment {
         //设置Adapter
         adapter = new MyRecycleViewAdapter(mDatas);
         recyclerView.setAdapter(adapter);
+
         return root;
     }
 
@@ -349,9 +350,7 @@ public class HomeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId()==R.id.action_to_top){
-            Toast.makeText(this.getContext(),"123",Toast.LENGTH_SHORT).show();
-        }
+        recyclerView.smoothScrollToPosition(0);
         return super.onOptionsItemSelected(item);
     }
 

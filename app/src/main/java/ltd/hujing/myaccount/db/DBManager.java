@@ -5,13 +5,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
-import ltd.hujing.myaccount.utils.DoubleUtils;
 
 /*
 *负责管理数据库对表中的数据进行增删改查
@@ -278,7 +275,9 @@ public class DBManager {
             @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
             @SuppressLint("Range") double total = cursor.getDouble(cursor.getColumnIndex("total"));
             //计算所占百分比  total /sumMonth
-            double ratio = DoubleUtils.div(total,sumMoneyOneMonth);
+            double ratio =total/sumMoneyOneMonth;
+            BigDecimal bigDecimal = new BigDecimal(ratio);
+            ratio = bigDecimal.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
             ChartItemBean bean = new ChartItemBean(imageId, typename, ratio, total);
             list.add(bean);
         }
