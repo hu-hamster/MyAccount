@@ -43,7 +43,7 @@ public class addincome extends AppCompatActivity {
         }
         ActionBar actionBar = getSupportActionBar();   //隐藏自带标题栏
         if(actionBar != null){
-            actionBar.hide(); 
+            actionBar.hide();
         }
         tabLayout = findViewById(R.id.add_item_tab);
         viewPager2 = findViewById(R.id.add_item_viewpager2);
