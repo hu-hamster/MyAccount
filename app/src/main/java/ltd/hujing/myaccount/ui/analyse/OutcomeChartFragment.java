@@ -58,7 +58,7 @@ public class OutcomeChartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_income_chart, container, false);
+        View root = inflater.inflate(R.layout.fragment_outcome_chart, container, false);
 
         //获取Activity传递的对象
         Bundle bundle = getArguments();
@@ -79,17 +79,20 @@ public class OutcomeChartFragment extends Fragment {
         List<ChartItemBean>list = DBManager.getChartListFromAccounttb(year,month,kind);
         mDatas.clear();
         mDatas.addAll(list);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         loadData(year, month, 0);
-        adapter.notifyDataSetChanged();
+
     }
 
 
     public void setDate(int year, int month){
+        this.year = year;
+        this.month = month;
         loadData(year,month,0);
     }
 

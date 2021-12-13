@@ -28,7 +28,6 @@ public class IncomeChartFragment extends Fragment {
     private MyRecycleViewAdapter adapter;
     private List<ChartItemBean> mDatas;
 
-
     public MyRecycleViewAdapter getAdapter() {
         return adapter;
     }
@@ -64,9 +63,9 @@ public class IncomeChartFragment extends Fragment {
         year = bundle.getInt("year");
         month = bundle.getInt("month");
         //设置数据源
-        mDatas = new ArrayList<>();
+        loadData(year,month,1);
         //设置适配器
-        recyclerView = root.findViewById(R.id.frag_chart_lv);
+        recyclerView = root.findViewById(R.id.frag_chart_lv2);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new MyRecycleViewAdapter(getContext(),mDatas);
@@ -76,11 +75,12 @@ public class IncomeChartFragment extends Fragment {
 
     public void loadData(int year, int month, int kind) {
         List<ChartItemBean>list = DBManager.getChartListFromAccounttb(year,month,kind);
-        mDatas.clear();
+        mDatas = new ArrayList<>();
         mDatas.addAll(list);
 
     }
 
+    @Override
     public void onResume() {
         super.onResume();
         loadData(year, month, 1);
@@ -89,7 +89,10 @@ public class IncomeChartFragment extends Fragment {
 
 
     public void setDate(int year, int month){
+        this.year = year;
+        this.month = month;
         loadData(year,month,1);
+        adapter.notifyDataSetChanged();
     }
 
     private class MyRecycleViewAdapter extends RecyclerView.Adapter {

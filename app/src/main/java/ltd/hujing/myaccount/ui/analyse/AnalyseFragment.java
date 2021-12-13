@@ -103,6 +103,7 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
         if(sumMoneyOneMonth==0.0){
             pieChart.setVisibility(View.GONE);
         }else{
+            pieChart.setVisibility(View.VISIBLE);
             double incomePercent = inMoneyOneMonth/sumMoneyOneMonth*100;
             double outcomePercent = outMoneyOneMonth/sumMoneyOneMonth*100;
             BigDecimal in = new BigDecimal(incomePercent);
