@@ -83,7 +83,7 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
     //初始化饼状图
     private void initPieChart(int year,int month) {
         pieChart.getDescription().setEnabled(false); // 不显示描述
-       // pieChart.setDrawHoleEnabled(false); // 不显示饼图中间的空洞
+
 
         pieChart.setDrawEntryLabels(false); // 不在饼图中显示标签
         pieChart.setExtraOffsets(30,10,30,15); // 设置饼图的偏移量
@@ -172,7 +172,6 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
                 setButtonStyle(position);
             }
         });
-
     }
 
     //内部类、设置适配器
@@ -253,6 +252,7 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
                 AnalyseFragment.this.selectPos = selPos;
                 AnalyseFragment.this.selectMonth = month;
                 initStatistics(year,month);
+                pieChart.setVisibility(View.GONE);
                 initPieChart(year,month);
                 outcomeChartFragment.setDate(year,month);
                 incomeChartFragment.setDate(year,month);

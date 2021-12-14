@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -125,6 +126,7 @@ public class HistoryFragment extends Fragment {
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
             HistoryFragment.MyRecycleViewAdapter.MyViewHolder viewHolder = (HistoryFragment.MyRecycleViewAdapter.MyViewHolder) holder;
+            viewHolder.getRelativeLayout().setVisibility(View.GONE);
             viewHolder.getTypeIv().setImageResource(mDatas.get(position).getImageid());
             viewHolder.getTypeTv().setText(mDatas.get(position).getTypename());
             viewHolder.getDescriptionTv().setText(mDatas.get(position).getDescription());
@@ -142,12 +144,14 @@ public class HistoryFragment extends Fragment {
         //内容holder
         private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener  {
             private ImageView typeIv;
+            private RelativeLayout relativeLayout;
             private TextView typeTv;
             private TextView descriptionTv;
             private TextView timeTv;
             private TextView moneyTv;
             public MyViewHolder(View view) {
                 super(view);
+                setRelativeLayout(view.findViewById(R.id.item_mainlv_rl));
                 setTypeIv(view.findViewById(R.id.item_mainlv_iv));
                 setTypeTv(view.findViewById(R.id.item_mainlv_tv_typename));
                 setDescriptionTv(view.findViewById(R.id.item_mainlv_tv_description));
@@ -156,6 +160,14 @@ public class HistoryFragment extends Fragment {
                 view.setOnCreateContextMenuListener(this);
 
 
+            }
+
+            public RelativeLayout getRelativeLayout() {
+                return relativeLayout;
+            }
+
+            public void setRelativeLayout(RelativeLayout relativeLayout) {
+                this.relativeLayout = relativeLayout;
             }
 
             public ImageView getTypeIv() {

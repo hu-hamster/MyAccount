@@ -171,6 +171,7 @@ public class HomeFragment extends Fragment {
             }else{
                 MyViewHolder viewHolder = (MyViewHolder) holder;
                 //添加显示逻辑
+                viewHolder.getRelativeLayout().setVisibility(View.VISIBLE);
                 viewHolder.getIncomeTv().setText("收："+DBManager.getSumMoneyOneDay(mDatas.get(position-1).getYear(),mDatas.get(position-1).getMonth(),mDatas.get(position-1).getDay(),1));
                 viewHolder.getOutcomeTv().setText("支："+DBManager.getSumMoneyOneDay(mDatas.get(position-1).getYear(),mDatas.get(position-1).getMonth(),mDatas.get(position-1).getDay(),0));
                 viewHolder.getTypeIv().setImageResource(mDatas.get(position-1).getImageid());
@@ -333,6 +334,7 @@ public class HomeFragment extends Fragment {
                     case 1:
                         AccountBean accountBean = mDatas.get(position);
                         showDeleteItemDialog(accountBean);     //删除框
+                        adapter.notifyDataSetChanged();
                         break;
                     case 2:
                         //修改信息
