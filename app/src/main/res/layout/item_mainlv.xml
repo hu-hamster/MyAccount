@@ -9,7 +9,7 @@
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="28dp"
-        android:background="@mipmap/home_top_background"
+        android:background="#00ffff"
         android:padding="5dp">
 
         <TextView

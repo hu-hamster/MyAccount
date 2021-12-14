@@ -14,9 +14,10 @@
             android:id="@+id/add_item_back"
             android:layout_width="38dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:onClick="onClick"
-            android:src="@mipmap/add_item_back" />
+            android:src="@mipmap/add_item_back"
+            tools:ignore="UsingOnClickInXml" />
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/add_item_tab"
             android:layout_width="wrap_content"
