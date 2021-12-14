@@ -1,59 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:padding="5dp"
+    android:orientation="vertical"
     android:background="#ffffff">
-    <ImageView
-        android:id="@+id/item_mainlv_iv"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@mipmap/daily"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/item_mainlv_iv"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:id="@+id/item_mainlv_tv_typename"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="其他"
-            android:textSize="20dp"
-            />
-        <TextView
-            android:id="@+id/item_mainlv_tv_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="这是备注"
-            android:textSize="13dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:gravity="right"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/item_mainlv_tv_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0.00"
-            android:textSize="20dp" />
+    <RelativeLayout
+        android:id="@+id/item_mainlv_rl"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:background="@mipmap/home_top_background"
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/item_mainlv_tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2021年12月2日 18:10"
-            android:textSize="13dp" />
+            android:text="日期：2021-12-13"
+            android:textSize="12sp" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/item_mainlv_tv_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/item_mainlv_tv_outcome"
+            android:paddingRight="10dp"
+            android:text="收：3000.00"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/item_mainlv_tv_outcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="支：3000.00"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+        <ImageView
+            android:id="@+id/item_mainlv_iv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@mipmap/daily"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/item_mainlv_iv"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/item_mainlv_tv_typename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他"
+                android:textSize="20dp"
+                />
+            <TextView
+                android:id="@+id/item_mainlv_tv_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="这是备注"
+                android:textSize="13dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_mainlv_tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textSize="20dp" />
 
 
-</RelativeLayout >
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout >

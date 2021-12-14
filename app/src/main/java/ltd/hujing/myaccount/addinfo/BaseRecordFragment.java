@@ -102,13 +102,19 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
             public void onEnsure() {
                 //点击了确定按钮->更新数据库->返回上一级
                 String moneyStr = moneyEt.getText().toString();
-                if(TextUtils.isEmpty(moneyStr)||moneyStr.equals("0")&&flag==0){
+                if((TextUtils.isEmpty(moneyStr)||moneyStr.equals("0"))&&flag==0){
 
+                    getActivity().finish();
+                    return;
+
+                }else if((TextUtils.isEmpty(moneyStr)||moneyStr.equals("0"))&&flag==1){
+                    saveAccountToDB();
                     getActivity().finish();
                     return;
                 }
                 double money = Double.parseDouble(moneyStr);
                 accountBean.setMoney(money);
+
                 saveAccountToDB();
                 //返回上级界面
                 getActivity().finish();

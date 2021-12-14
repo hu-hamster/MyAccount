@@ -115,7 +115,7 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
             // 把准备好的数据统一进行格式设置
             PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
             // 设置饼图各部分的颜色
-            pieDataSet.setColors(Color.parseColor("#3333FF"), Color.parseColor("#000033"));
+            pieDataSet.setColors(Color.parseColor("#3333FF"), Color.parseColor("#990033"));
             // 设置饼图中数据显示的格式
             float finalIncomePercent = (float) incomePercent; //与后面的显示做对比
             pieDataSet.setValueFormatter(new IValueFormatter() {

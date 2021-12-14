@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -169,11 +170,18 @@ public class HomeFragment extends Fragment {
                 viewHolder.getOutcometv().setText("￥ "+ outcomeMoney);
             }else{
                 MyViewHolder viewHolder = (MyViewHolder) holder;
+                //添加显示逻辑
+                viewHolder.getIncomeTv().setText("收："+DBManager.getSumMoneyOneDay(mDatas.get(position-1).getYear(),mDatas.get(position-1).getMonth(),mDatas.get(position-1).getDay(),1));
+                viewHolder.getOutcomeTv().setText("支："+DBManager.getSumMoneyOneDay(mDatas.get(position-1).getYear(),mDatas.get(position-1).getMonth(),mDatas.get(position-1).getDay(),0));
                 viewHolder.getTypeIv().setImageResource(mDatas.get(position-1).getImageid());
                 viewHolder.getTypeTv().setText(mDatas.get(position-1).getTypename());
                 viewHolder.getDescriptionTv().setText(mDatas.get(position-1).getDescription());
                 viewHolder.getMoneyTv().setText(String.valueOf(mDatas.get(position-1).getMoney()));
-                viewHolder.getTimeTv().setText(mDatas.get(position-1).getTime());
+                viewHolder.getTimeTv().setText(mDatas.get(position-1).getYear()+"-"+mDatas.get(position-1).getMonth()+"-"+mDatas.get(position-1).getDay());
+                if(position-1!=0&&mDatas.get(position-1).getDay()==mDatas.get(position-2).getDay()&&mDatas.get(position-1).getMonth()==mDatas.get(position-2).getMonth()&&mDatas.get(position-1).getYear()==mDatas.get(position-2).getYear()){
+                    viewHolder.getRelativeLayout().setVisibility(View.GONE);
+                }
+
             }
         }
 
@@ -220,20 +228,48 @@ public class HomeFragment extends Fragment {
         //内容holder
         private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener  {
             private ImageView typeIv;
+            private RelativeLayout relativeLayout;
             private TextView typeTv;
             private TextView descriptionTv;
             private TextView timeTv;
             private TextView moneyTv;
+            private TextView incomeTv;
+            private TextView outcomeTv;
             public MyViewHolder(View view) {
                 super(view);
+                setRelativeLayout(view.findViewById(R.id.item_mainlv_rl));
+                setIncomeTv(view.findViewById(R.id.item_mainlv_tv_income));
+                setOutcomeTv(view.findViewById(R.id.item_mainlv_tv_outcome));
                 setTypeIv(view.findViewById(R.id.item_mainlv_iv));
                 setTypeTv(view.findViewById(R.id.item_mainlv_tv_typename));
                 setDescriptionTv(view.findViewById(R.id.item_mainlv_tv_description));
                 setTimeTv(view.findViewById(R.id.item_mainlv_tv_time));
                 setMoneyTv(view.findViewById(R.id.item_mainlv_tv_money));
                 view.setOnCreateContextMenuListener(this);
+            }
 
+            public RelativeLayout getRelativeLayout() {
+                return relativeLayout;
+            }
 
+            public void setRelativeLayout(RelativeLayout relativeLayout) {
+                this.relativeLayout = relativeLayout;
+            }
+
+            public TextView getIncomeTv() {
+                return incomeTv;
+            }
+
+            public void setIncomeTv(TextView incomeTv) {
+                this.incomeTv = incomeTv;
+            }
+
+            public TextView getOutcomeTv() {
+                return outcomeTv;
+            }
+
+            public void setOutcomeTv(TextView outcomeTv) {
+                this.outcomeTv = outcomeTv;
             }
 
             public ImageView getTypeIv() {

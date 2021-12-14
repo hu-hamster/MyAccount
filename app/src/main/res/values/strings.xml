@@ -2,8 +2,8 @@
     <string name="app_name">纯记账</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">小勤快</string>
+    <string name="nav_header_subtitle">一个单纯的记账小书童</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_to_top">回到顶部</string>
 
