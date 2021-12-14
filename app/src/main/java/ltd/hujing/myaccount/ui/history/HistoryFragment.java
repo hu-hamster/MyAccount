@@ -26,9 +26,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import ltd.hujing.myaccount.R;
+import ltd.hujing.myaccount.addinfo.addincome;
 import ltd.hujing.myaccount.db.AccountBean;
 import ltd.hujing.myaccount.db.DBManager;
 import ltd.hujing.myaccount.ui.home.DetailsActivity;
+import ltd.hujing.myaccount.ui.home.HomeFragment;
 import ltd.hujing.myaccount.utils.CalendarDialog;
 
 
@@ -103,9 +105,6 @@ public class HistoryFragment extends Fragment {
     }
 
     private class MyRecycleViewAdapter extends RecyclerView.Adapter {
-        public static final int ITEM_TYPE_HEADER = 0;
-        public static final int ITEM_TYPE_CONTENT = 1;
-
         private List<AccountBean> mDatas;
 
         public MyRecycleViewAdapter(List<AccountBean> mDatas) {
@@ -223,7 +222,10 @@ public class HistoryFragment extends Fragment {
                         break;
                     case 2:
                         //修改信息
-
+                        intent = new Intent(getContext(), addincome.class);
+                        intent.putExtra("flag",1);   //修改标志位
+                        intent.putExtra("id",mDatas.get(position).getId());
+                        startActivity(intent);
                         break;
                 }
                 return false;

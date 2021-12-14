@@ -30,6 +30,8 @@
 
         </RelativeLayout>
 
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/history_recycle"
             android:layout_width="match_parent"

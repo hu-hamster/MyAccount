@@ -115,7 +115,7 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
             // 把准备好的数据统一进行格式设置
             PieDataSet pieDataSet = new PieDataSet(pieEntries, "");
             // 设置饼图各部分的颜色
-            pieDataSet.setColors(Color.parseColor("#F7F709"), Color.parseColor("#1AE61A"));
+            pieDataSet.setColors(Color.parseColor("#3333FF"), Color.parseColor("#000033"));
             // 设置饼图中数据显示的格式
             float finalIncomePercent = (float) incomePercent; //与后面的显示做对比
             pieDataSet.setValueFormatter(new IValueFormatter() {
@@ -163,6 +163,7 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
         //添加适配器
         MyViewpagerAdapter myViewpagerAdapter = new MyViewpagerAdapter(this);
         chartViewpager2.setAdapter(myViewpagerAdapter);
+        chartViewpager2.setOffscreenPageLimit(chartFraglist.size());  //预加载所有fragment防止bug
         //设置viewpager2滑动监听
         chartViewpager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -196,6 +197,7 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
 
     //统计某年某月的收支情况数据
     private void initStatistics(int year, int month) {
+
         double inMoneyOneMonth =  DBManager.getSumMoneyOneMonth(year,month,1);    //收入总金额
         double outMoneyOneMonth = DBManager.getSumMoneyOneMonth(year,month,0);    //支出总金额
         int inCountItemOneMonth = DBManager.getCountItemOneMonth(year,month,1);   //收入多少笔
