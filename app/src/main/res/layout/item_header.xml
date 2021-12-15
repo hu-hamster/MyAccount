@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="146dp"
-    android:background="@mipmap/item_header_background">
+    android:background="@mipmap/home_top_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,8 @@
             android:gravity="center"
             android:text="@string/item_header_assets_value"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#00aaff"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +45,8 @@
                 android:gravity="center"
                 android:text="@string/item_header_income_value"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#00aaff"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                 android:gravity="center"
                 android:text="@string/item_header_expenditure_value"
                 android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#ff0000"/>
 
             <TextView
                 android:layout_width="match_parent"

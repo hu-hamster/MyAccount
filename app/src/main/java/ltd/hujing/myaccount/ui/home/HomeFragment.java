@@ -166,13 +166,13 @@ public class HomeFragment extends Fragment {
                 HeaderViewHolder viewHolder = (HeaderViewHolder) holder;
                 viewHolder.getAlltv().setText("￥ "+ allMoney);
                 viewHolder.getIncometv().setText("￥ "+ incomeMoney);
-                viewHolder.getOutcometv().setText("￥ "+ outcomeMoney);
+                viewHolder.getOutcometv().setText("￥ "+ Math.abs(outcomeMoney));
             }else{
                 MyViewHolder viewHolder = (MyViewHolder) holder;
                 //添加显示逻辑
                 viewHolder.getRelativeLayout().setVisibility(View.VISIBLE);
                 viewHolder.getIncomeTv().setText("收："+DBManager.getSumMoneyOneDay(mDatas.get(position-1).getYear(),mDatas.get(position-1).getMonth(),mDatas.get(position-1).getDay(),1));
-                viewHolder.getOutcomeTv().setText("支："+DBManager.getSumMoneyOneDay(mDatas.get(position-1).getYear(),mDatas.get(position-1).getMonth(),mDatas.get(position-1).getDay(),0));
+                viewHolder.getOutcomeTv().setText("支："+Math.abs(DBManager.getSumMoneyOneDay(mDatas.get(position-1).getYear(),mDatas.get(position-1).getMonth(),mDatas.get(position-1).getDay(),0)));
                 viewHolder.getTypeIv().setImageResource(mDatas.get(position-1).getImageid());
                 viewHolder.getTypeTv().setText(mDatas.get(position-1).getTypename());
                 viewHolder.getDescriptionTv().setText(mDatas.get(position-1).getDescription());

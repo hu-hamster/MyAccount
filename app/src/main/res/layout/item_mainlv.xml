@@ -9,7 +9,7 @@
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="27dp"
-        android:background="#00ffff"
+        android:background="#00aaff"
         android:padding="5dp">
 
         <TextView

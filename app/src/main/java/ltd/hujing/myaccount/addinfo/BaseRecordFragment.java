@@ -65,9 +65,6 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         if(flag==0){
             accountBean.setTypename("其他");
             accountBean.setImageid(R.mipmap.other);
-        }else{
-            typeTv.setText(accountBean.getTypename());
-            typeIv.setImageResource(accountBean.getImageid());
         }
         return root;
     }
@@ -86,6 +83,8 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
             moneyEt.setHint(accountBean.getMoney()+"");
             typeIv.setImageResource(accountBean.getImageid());
             descriptionTv.setText(accountBean.getDescription());
+            typeTv.setText(accountBean.getTypename());
+            typeIv.setImageResource(accountBean.getImageid());
         }
         //初始化当前时间
         setInitTime();

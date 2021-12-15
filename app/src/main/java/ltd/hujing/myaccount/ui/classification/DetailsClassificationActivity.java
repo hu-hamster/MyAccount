@@ -126,7 +126,7 @@ public class DetailsClassificationActivity extends AppCompatActivity {
             viewHolder.getRelativeLayout().setVisibility(View.VISIBLE);
             if(kind == 0){
                 viewHolder.getIncomeTv().setText("");
-                viewHolder.getOutcomeTv().setText("支："+DBManager.getSumMoneyOneDay(mDatas.get(position).getYear(),mDatas.get(position).getMonth(),mDatas.get(position).getDay(),0));
+                viewHolder.getOutcomeTv().setText("支："+Math.abs(DBManager.getSumMoneyOneDay(mDatas.get(position).getYear(),mDatas.get(position).getMonth(),mDatas.get(position).getDay(),0)));
             }else {
                 viewHolder.getIncomeTv().setText("收："+DBManager.getSumMoneyOneDay(mDatas.get(position).getYear(),mDatas.get(position).getMonth(),mDatas.get(position).getDay(),1));
                 viewHolder.getOutcomeTv().setText("");
