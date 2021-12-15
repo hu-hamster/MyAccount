@@ -4,7 +4,6 @@
 
     <application
         android:name=".UniteApp"
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,10 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAccount">
         <activity
+            android:name=".ui.classification.DetailsClassificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.DetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".addinfo.addincome"
+            android:name=".addinfo.addinfo"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

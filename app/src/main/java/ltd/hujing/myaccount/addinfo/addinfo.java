@@ -24,16 +24,16 @@ import ltd.hujing.myaccount.db.DBManager;
 /*
 * 添加item的具体实现，主要使用tablayouth加viewpager2
  */
-public class addincome extends AppCompatActivity {
-    TabLayout tabLayout;
-    ViewPager2 viewPager2;
+public class addinfo extends AppCompatActivity {
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager2;
     private int flag;  //设置修改或添加标志位
     private int id;    //如果为修改标志位，则获取item的id
-    AccountBean accountBean;  //如果为修改标志位，则获得要修改的item
+    private AccountBean accountBean;  //如果为修改标志位，则获得要修改的item
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addincome);
+        setContentView(R.layout.activity_addinfo);
         Intent intent = getIntent();
         flag = intent.getIntExtra("flag",0);
         accountBean = new AccountBean();
@@ -68,7 +68,7 @@ public class addincome extends AppCompatActivity {
             }
             @Override
             public int getItemCount() {
-                return 2;
+                return fragmentList.size();
             }
         });
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
@@ -90,7 +90,7 @@ public class addincome extends AppCompatActivity {
     //返回的逻辑实现
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.add_item_back:
+            case R.id.details_classification_back:
                 finish();
                 break;
         }

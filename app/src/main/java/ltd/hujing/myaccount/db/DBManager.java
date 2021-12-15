@@ -311,6 +311,57 @@ public class DBManager {
         return 0;
     }
 
+    /**
+    * 根据类型获取accounttb表中的账单数
+    **/
+    public static int getCountItemFromTypename(String typename,int kind){
+        int total = 0;
+        String sql = "select count(*) from accounttb where typename=? and kind=?";
+        Cursor cursor = db.rawQuery(sql, new String[]{typename,kind+""});
+        if (cursor.moveToNext()) {
+            @SuppressLint("Range") int count = cursor.getInt(cursor.getColumnIndex("count(*)"));
+            total = count;
+        }
+        return total;
+    }
 
+    /**
+     * 根据类型获取accounttb表中的金额总数
+     **/
+    public static double getSumMoneyFromTypename(String typename,int kind){
+        double total = 0.0;
+        String sql = "select sum(money) from accounttb where typename=? and kind=?";
+        Cursor cursor = db.rawQuery(sql, new String[]{typename,kind+""});
+        if (cursor.moveToNext()) {
+            @SuppressLint("Range") int count = cursor.getInt(cursor.getColumnIndex("sum(money)"));
+            total = count;
+        }
+        return total;
+    }
+
+    /**
+     * 根据类型获取accounttb表中的账目
+     **/
+    public static List<AccountBean>getAccountListFromAccounttbByTypename(String Typename, int Kind){
+        List<AccountBean>list = new ArrayList<>();
+        String sql = "select * from accounttb where typename=? and kind =? order by year desc, month desc,day desc";
+        Cursor cursor = db.rawQuery(sql,new String[]{Typename,Kind+""});
+        //便利数据库每一行
+        while(cursor.moveToNext()){
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("id"));
+            @SuppressLint("Range") int imageid = cursor.getInt(cursor.getColumnIndex("imageid"));
+            @SuppressLint("Range") String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            @SuppressLint("Range") String description = cursor.getString(cursor.getColumnIndex("description"));
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("money"));
+            @SuppressLint("Range") String time = cursor.getString(cursor.getColumnIndex("time"));
+            @SuppressLint("Range") int year = cursor.getInt(cursor.getColumnIndex("year"));
+            @SuppressLint("Range") int month = cursor.getInt(cursor.getColumnIndex("month"));
+            @SuppressLint("Range") int day = cursor.getInt(cursor.getColumnIndex("day"));
+            @SuppressLint("Range") int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            AccountBean accountBean = new AccountBean(id, typename, imageid, description, money, time, year, month, day, kind);
+            list.add(accountBean);
+        }
+        return list;
+    }
 
 }

@@ -49,10 +49,7 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(flag==0){
-            accountBean.setTypename("其他");
-            accountBean.setImageid(R.mipmap.other);
-        }
+
     }
 
 
@@ -65,7 +62,10 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
         //添加给GridView填充数据的方法
         loadDataToGV();
         setGVLister();
-        if(flag==1){
+        if(flag==0){
+            accountBean.setTypename("其他");
+            accountBean.setImageid(R.mipmap.other);
+        }else{
             typeTv.setText(accountBean.getTypename());
             typeIv.setImageResource(accountBean.getImageid());
         }

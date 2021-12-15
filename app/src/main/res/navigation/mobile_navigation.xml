@@ -21,12 +21,20 @@
         android:id="@+id/nav_analyse"
         android:name="ltd.hujing.myaccount.ui.analyse.AnalyseFragment"
         android:label="@string/menu_analyse"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_analyse" />
+
+    <fragment
+        android:id="@+id/nav_classification"
+        android:name="ltd.hujing.myaccount.ui.classification.ClassificationFragment"
+        android:label="分类管理"
+        tools:layout="@layout/fragment_classification"/>
 
     <fragment
         android:id="@+id/nav_about"
         android:name="ltd.hujing.myaccount.ui.about.AboutFragment"
         android:label="关于软件"
         tools:layout="@layout/fragment_about"/>
+
+
 
 </navigation>

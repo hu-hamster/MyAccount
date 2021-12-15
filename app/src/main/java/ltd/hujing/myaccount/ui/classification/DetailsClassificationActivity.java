@@ -1,15 +1,15 @@
-package ltd.hujing.myaccount.ui.history;
+package ltd.hujing.myaccount.ui.classification;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,10 +20,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import ltd.hujing.myaccount.R;
@@ -31,134 +29,143 @@ import ltd.hujing.myaccount.addinfo.addinfo;
 import ltd.hujing.myaccount.db.AccountBean;
 import ltd.hujing.myaccount.db.DBManager;
 import ltd.hujing.myaccount.ui.home.DetailsActivity;
-import ltd.hujing.myaccount.utils.CalendarDialog;
+import ltd.hujing.myaccount.ui.home.HomeFragment;
 
-
-public class HistoryFragment extends Fragment {
-
+public class DetailsClassificationActivity extends AppCompatActivity {
+    private TextView typenameTv, accountTv, moneyTv;
+    private ImageView imageView;
     private RecyclerView recyclerView;
-    private TextView timeTv;
+    private int imageId,kind;
+    private String typename;
     private List<AccountBean> mDatas;
     private MyRecycleViewAdapter adapter;
-    private int year, month;
-    private int dialogSelPos = -1;
-    private int dialogSelMonth = -1;
-    public HistoryFragment() {
-        // Required empty public constructor
-    }
-
-    public static HistoryFragment newInstance(String param1, String param2) {
-        HistoryFragment fragment = new HistoryFragment();
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //设置菜单可见
-        setHasOptionsMenu(true);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_history, container, false);
-        initTime();  //初始化时间
-
-        mDatas = new ArrayList<>();
-
-        timeTv = root.findViewById(R.id.history_tv_time);
-        timeTv.setText(year+"-"+month);
-        loadDate(year,month);
-        recyclerView = root.findViewById(R.id.history_recycle);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        //设置Adapter
-        adapter = new HistoryFragment.MyRecycleViewAdapter(mDatas);
-        recyclerView.setAdapter(adapter);
-        loadDate(year, month);
-
-        return root;
+        setContentView(R.layout.activity_details_classification);
+        ActionBar actionBar = getSupportActionBar();   //隐藏自带标题栏
+        if(actionBar != null){
+            actionBar.hide();
+        }
+        initView();
+        loadDBDate();
+        initFrag();
 
     }
 
-    //获取指定年月的item
-    private void loadDate(int year,int month) {
-        List<AccountBean> accountBeans = DBManager.getAccountListOneMonthFromAccounttb(year,month);
+    private void loadDBDate() {
+        List<AccountBean> accountBeans = DBManager.getAccountListFromAccounttbByTypename(typename,kind);
         mDatas.clear();
         mDatas.addAll(accountBeans);
+    }
+
+    private void initFrag() {
+        setTopTvShow();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new MyRecycleViewAdapter(mDatas);
+        recyclerView.setAdapter(adapter);
 
     }
 
-    private void initTime() {
-        Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH)+1;
+    private void setTopTvShow() {
+        typenameTv.setText(typename);
+        imageView.setImageResource(imageId);
+        int account = DBManager.getCountItemFromTypename(typename,kind);
+        accountTv.setText("共"+account+"笔");
+        double income = DBManager.getSumMoneyFromTypename(typename,kind);
+        if(kind==0){
+            moneyTv.setText("支出总额："+income);
+        }else{
+            moneyTv.setText("收入总额："+income);
+        }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        loadDate(year,month);
-        adapter.notifyDataSetChanged();
+    private void initView() {
+        typenameTv = findViewById(R.id.details_classification_tv_typename);
+        accountTv = findViewById(R.id.details_classification_tv_account);
+        moneyTv = findViewById(R.id.details_classification_tv_money);
+        imageView = findViewById(R.id.details_classification_ig);
+        recyclerView = findViewById(R.id.details_classification_recycle);
+        Intent intent = getIntent();
+        typename = intent.getStringExtra("typename");
+        imageId = intent.getIntExtra("imageid",0);
+        kind = intent.getIntExtra("kind",0);
+        mDatas = new ArrayList<>();
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.details_classification_back:
+                finish();
+                break;
+            case R.id.details_classification_to_top:
+                recyclerView.smoothScrollToPosition(0);
+                break;
+
+        }
     }
 
     private class MyRecycleViewAdapter extends RecyclerView.Adapter {
-        private List<AccountBean> mDatas;
-
+        List<AccountBean> mDatas;
         public MyRecycleViewAdapter(List<AccountBean> mDatas) {
             this.mDatas = mDatas;
         }
 
-
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view;
-            view = LayoutInflater.from(HistoryFragment.this.getContext()).inflate(R.layout.item_mainlv, parent,false);
-            return new HistoryFragment.MyRecycleViewAdapter.MyViewHolder(view);
-
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mainlv, parent,false);
+            return new MyViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-            HistoryFragment.MyRecycleViewAdapter.MyViewHolder viewHolder = (HistoryFragment.MyRecycleViewAdapter.MyViewHolder) holder;
-            viewHolder.getRelativeLayout().setVisibility(View.GONE);
+            MyRecycleViewAdapter.MyViewHolder viewHolder = (MyRecycleViewAdapter.MyViewHolder) holder;
+            //添加显示逻辑
+            viewHolder.getRelativeLayout().setVisibility(View.VISIBLE);
+            if(kind == 0){
+                viewHolder.getIncomeTv().setText("");
+                viewHolder.getOutcomeTv().setText("支："+DBManager.getSumMoneyOneDay(mDatas.get(position).getYear(),mDatas.get(position).getMonth(),mDatas.get(position).getDay(),0));
+            }else {
+                viewHolder.getIncomeTv().setText("收："+DBManager.getSumMoneyOneDay(mDatas.get(position).getYear(),mDatas.get(position).getMonth(),mDatas.get(position).getDay(),1));
+                viewHolder.getOutcomeTv().setText("");
+            }
             viewHolder.getTypeIv().setImageResource(mDatas.get(position).getImageid());
             viewHolder.getTypeTv().setText(mDatas.get(position).getTypename());
             viewHolder.getDescriptionTv().setText(mDatas.get(position).getDescription());
             viewHolder.getMoneyTv().setText(String.valueOf(mDatas.get(position).getMoney()));
-            viewHolder.getTimeTv().setText(mDatas.get(position).getTime());
-
+            viewHolder.getTimeTv().setText(mDatas.get(position).getYear()+"-"+mDatas.get(position).getMonth()+"-"+mDatas.get(position).getDay());
+            if(position!=0&&mDatas.get(position).getDay()==mDatas.get(position-1).getDay()&&mDatas.get(position).getMonth()==mDatas.get(position-1).getMonth()&&mDatas.get(position).getYear()==mDatas.get(position-1).getYear()){
+                viewHolder.getRelativeLayout().setVisibility(View.GONE);
+            }
         }
 
         @Override
         public int getItemCount() {
-            return mDatas.size() ;
+            return mDatas.size();
         }
-        //头部holder
 
-        //内容holder
-        private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener  {
+        private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
             private ImageView typeIv;
             private RelativeLayout relativeLayout;
             private TextView typeTv;
             private TextView descriptionTv;
             private TextView timeTv;
             private TextView moneyTv;
+            private TextView incomeTv;
+            private TextView outcomeTv;
             public MyViewHolder(View view) {
                 super(view);
                 setRelativeLayout(view.findViewById(R.id.item_mainlv_rl));
+                setIncomeTv(view.findViewById(R.id.item_mainlv_tv_income));
+                setOutcomeTv(view.findViewById(R.id.item_mainlv_tv_outcome));
                 setTypeIv(view.findViewById(R.id.item_mainlv_iv));
                 setTypeTv(view.findViewById(R.id.item_mainlv_tv_typename));
                 setDescriptionTv(view.findViewById(R.id.item_mainlv_tv_description));
                 setTimeTv(view.findViewById(R.id.item_mainlv_tv_time));
                 setMoneyTv(view.findViewById(R.id.item_mainlv_tv_money));
                 view.setOnCreateContextMenuListener(this);
-
-
             }
 
             public RelativeLayout getRelativeLayout() {
@@ -167,6 +174,22 @@ public class HistoryFragment extends Fragment {
 
             public void setRelativeLayout(RelativeLayout relativeLayout) {
                 this.relativeLayout = relativeLayout;
+            }
+
+            public TextView getIncomeTv() {
+                return incomeTv;
+            }
+
+            public void setIncomeTv(TextView incomeTv) {
+                this.incomeTv = incomeTv;
+            }
+
+            public TextView getOutcomeTv() {
+                return outcomeTv;
+            }
+
+            public void setOutcomeTv(TextView outcomeTv) {
+                this.outcomeTv = outcomeTv;
             }
 
             public ImageView getTypeIv() {
@@ -217,12 +240,12 @@ public class HistoryFragment extends Fragment {
                     case 0:
                         //查看信息
                         System.out.println(String.valueOf(mDatas.get(position).getMoney()));
-                        intent = new Intent(HistoryFragment.this.getContext(), DetailsActivity.class);
+                        intent = new Intent(DetailsClassificationActivity.this, DetailsActivity.class);
                         intent.putExtra("details_tv_amount",String.valueOf(mDatas.get(position).getMoney()));
                         intent.putExtra("details_tv_typename",mDatas.get(position).getTypename());
                         intent.putExtra("details_tv_account_type",mDatas.get(position).getKind()==1?"收入":"支出");
                         intent.putExtra("details_tv_time",mDatas.get(position).getTime());
-                        intent.putExtra("details_tv_balance", DBManager.getSumMoneyAll()+"");
+                        intent.putExtra("details_tv_balance",DBManager.getSumMoneyAll()+"");
                         intent.putExtra("details_tv_description",mDatas.get(position).getDescription());
                         intent.putExtra("details_iv_type",mDatas.get(position).getImageid());
                         startActivity(intent);
@@ -230,10 +253,11 @@ public class HistoryFragment extends Fragment {
                     case 1:
                         AccountBean accountBean = mDatas.get(position);
                         showDeleteItemDialog(accountBean);     //删除框
+                        adapter.notifyDataSetChanged();
                         break;
                     case 2:
                         //修改信息
-                        intent = new Intent(getContext(), addinfo.class);
+                        intent = new Intent(DetailsClassificationActivity.this, addinfo.class);
                         intent.putExtra("flag",1);   //修改标志位
                         intent.putExtra("id",mDatas.get(position).getId());
                         startActivity(intent);
@@ -243,7 +267,7 @@ public class HistoryFragment extends Fragment {
             }
 
             private void showDeleteItemDialog(final AccountBean accountBean) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(HistoryFragment.this.getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailsClassificationActivity.this);
                 builder.setTitle("提示信息").setMessage("是否删除该信息")
                         .setNegativeButton("取消",null)
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -254,6 +278,7 @@ public class HistoryFragment extends Fragment {
                                 DBManager.deleteItemFromAccounttbById(clickId);
                                 mDatas.remove(accountBean);        //实时刷新，移除集合当中的对象
                                 notifyDataSetChanged();    //更新数据
+                                setTopTvShow();
                             }
                         });
                 builder.create().show();    //显示对话框
@@ -267,51 +292,10 @@ public class HistoryFragment extends Fragment {
                 menuItemDetail.setOnMenuItemClickListener(this);
                 menuItemDelete.setOnMenuItemClickListener(this);
                 menuItemEdit.setOnMenuItemClickListener(this);
-
             }
         }
+
     }
 
-    //为fragment设置菜单项
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.history_menu, menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if(item.getItemId()==R.id.history_calendar){
-            CalendarDialog calendarDialog = new CalendarDialog(this.getContext(),this.dialogSelPos,this.dialogSelMonth);
-            calendarDialog.show();
-            calendarDialog.setDialogSize();
-            calendarDialog.setOnRefreshListener(new CalendarDialog.OnRefreshListener() {
-                @Override
-                public void onRefresh(int selPos, int year, int month) {
-                    timeTv.setText(year+"-"+month+"");
-                    loadDate(year,month);
-                    dialogSelPos = selPos;
-                    dialogSelMonth = month;
-                    adapter.notifyDataSetChanged();
-                }
-            });
-        }else if(item.getItemId()==R.id.history_delete){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-            builder.setTitle("删除提示")
-                    .setMessage("您确定要删除所有记录吗？\n注意：删除后无法恢复!")
-                    .setPositiveButton("取消",null)
-                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getContext(),"删除成功",Toast.LENGTH_SHORT).show();
-                            mDatas.clear();
-                            adapter.notifyDataSetChanged();    //更新数据
-                            DBManager.deleteAllAccount();
-                        }
-                    });
-            builder.create().show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

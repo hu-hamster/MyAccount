@@ -17,8 +17,6 @@ import ltd.hujing.myaccount.R;
  */
 public class AboutFragment extends Fragment {
 
-
-
     public static AboutFragment newInstance(String param1, String param2) {
         AboutFragment fragment = new AboutFragment();
         return fragment;

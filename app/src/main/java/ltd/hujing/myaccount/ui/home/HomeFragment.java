@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,7 +27,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import ltd.hujing.myaccount.R;
-import ltd.hujing.myaccount.addinfo.addincome;
+import ltd.hujing.myaccount.addinfo.addinfo;
 import ltd.hujing.myaccount.db.AccountBean;
 import ltd.hujing.myaccount.db.DBManager;
 
@@ -65,7 +64,7 @@ public class HomeFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeFragment.this.getActivity(), addincome.class);
+                Intent intent = new Intent(HomeFragment.this.getActivity(), addinfo.class);
                 intent.putExtra("flag",0); //添加标志位
                 startActivity(intent);
             }
@@ -338,7 +337,7 @@ public class HomeFragment extends Fragment {
                         break;
                     case 2:
                         //修改信息
-                        intent = new Intent(HomeFragment.this.getActivity(), addincome.class);
+                        intent = new Intent(HomeFragment.this.getActivity(), addinfo.class);
                         intent.putExtra("flag",1);   //修改标志位
                         intent.putExtra("id",mDatas.get(position).getId());
                         startActivity(intent);
@@ -387,7 +386,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         recyclerView.smoothScrollToPosition(0);
         return super.onOptionsItemSelected(item);
     }
