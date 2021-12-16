@@ -146,7 +146,9 @@ public abstract class BaseRecordFragment extends Fragment implements View.OnClic
     private void setGVLister() {
         typeGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void
+
+            onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 adapter.setSelectPos(position);
                 adapter.notifyDataSetChanged();      //提示绘制发生变化
                 TypeBean typeBean = typeBeanList.get(position);

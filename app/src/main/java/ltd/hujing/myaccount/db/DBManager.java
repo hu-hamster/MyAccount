@@ -110,7 +110,7 @@ public class DBManager {
      */
     public static List<AccountBean>getAccountListFromAccounttb(){
         List<AccountBean>list = new ArrayList<>();
-        String sql = "select * from accounttb order by year desc, month desc,day desc";   //逆序查找
+        String sql = "select * from accounttb order by year desc, month desc,day desc,time desc";   //逆序查找
         Cursor cursor = db.rawQuery(sql,null);
         //便利数据库每一行
         while(cursor.moveToNext()){
@@ -344,7 +344,7 @@ public class DBManager {
      **/
     public static List<AccountBean>getAccountListFromAccounttbByTypename(String Typename, int Kind){
         List<AccountBean>list = new ArrayList<>();
-        String sql = "select * from accounttb where typename=? and kind =? order by year desc, month desc,day desc";
+        String sql = "select * from accounttb where typename=? and kind =? order by year desc, month desc,day desc, time desc";
         Cursor cursor = db.rawQuery(sql,new String[]{Typename,Kind+""});
         //便利数据库每一行
         while(cursor.moveToNext()){
@@ -362,6 +362,21 @@ public class DBManager {
             list.add(accountBean);
         }
         return list;
+    }
+
+    /*
+     * 获取某一天的支出或者收入的总金额   kind： 支出-0  收入-1
+     */
+    public static double getSumMoneyOneDayByTypename(String typename, int year,int month,int day,int kind) {
+        double total = 0.0;
+        String sql = "select sum(money) from accounttb where typename=? and year=? and month=? and day=? and kind=?";
+        Cursor cursor =  db.rawQuery(sql,new String[]{typename, year+"",month+"",day+"",kind+""});
+        //遍历
+        if(cursor.moveToFirst()){
+            @SuppressLint("Range") double money = cursor.getDouble(cursor.getColumnIndex("sum(money)"));
+            total = money;
+        }
+        return total;
     }
 
 }
