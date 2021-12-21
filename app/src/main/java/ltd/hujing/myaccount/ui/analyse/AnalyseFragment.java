@@ -137,7 +137,6 @@ public class AnalyseFragment extends Fragment implements View.OnClickListener{
             pieDataSet.setValueLinePart1Length(0.4f); // 第一条线长度
             pieDataSet.setValueLinePart2Length(0.2f); // 第二条线长度
             pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE); // 设置值显示的位置
-
             PieData pieData = new PieData(pieDataSet);
             pieChart.setData(pieData); // 为饼图设置数据
         }

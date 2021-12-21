@@ -83,11 +83,7 @@ abstract public class BaseChartFragment extends Fragment {
         mDatas.clear();
         mDatas.addAll(list);
         adapter.notifyDataSetChanged();
-
     }
-
-
-
 
     abstract public void setDate(int year, int month);
 
